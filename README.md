@@ -34,8 +34,8 @@
 
    - Админы создали нам на каждой виртуалке пользователя **infra**.
    - У тебя есть ssh ключи для безпарольного доступа пользователя **infra** на все виртуалки. Ключи находятся на твоей машине тут - `/home/infra/.ssh/`.
-   - На всез виртуалках пользователь **infra** может стать root без введения пароля.
-
+   - На всех виртуалках пользователь **infra** может стать root без введения пароля.<br/><br/>
+   
    > `docker run --rm -e "USER=infra" -v /home/infra/.ssh/:/host_ssh kubespray ansible-playbook --become --become-user=root master_playbook.yml`
 
    Пояснения:
