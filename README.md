@@ -28,20 +28,21 @@
 
    > `docker build -t kubespray -f Dockerfile_kubespray.`
 
-   Запускаем kubespray:
+2. Запускаем kubespray:
 
    Полагаем, что:
 
-   1. Админы создали нам на каждой виртуалке пользователя **infra**.
-   2. У тебя есть ssh ключи для безпарольного доступа пользователя **infra** на все виртуалки. Ключи находятся на твоей машине тут - `/home/infra/.ssh/`.
-   3. На всез виртуалках пользователь **infra** может стать root без введения пароля.
+   - Админы создали нам на каждой виртуалке пользователя **infra**.
+   - У тебя есть ssh ключи для безпарольного доступа пользователя **infra** на все виртуалки. Ключи находятся на твоей машине тут - `/home/infra/.ssh/`.
+   - На всез виртуалках пользователь **infra** может стать root без введения пароля.
 
-   > `docker run --rm -e "USER=infra" -v /home/infra/.ssh/:/host_ssh kubespray ansible-playbook --become --become-user=root master_playbook.yml`
 
-   Пояснения:
+    > `docker run --rm -e "USER=infra" -v /home/infra/.ssh/:/host_ssh kubespray ansible-playbook --become --become-user=root master_playbook.yml`
 
-   > `-e "USER=infra"` - мы запускаем kubespray от лица пользователя **infra**
+    Пояснения:
 
-   > `-v /home/infra/.ssh/:/host_ssh` - указываем путь к ssh ключам пользователя **infra** на твоей машине. `/host_ssh` используется в `scripts/kubespray-entrypoint.sh`.
+    > `-e "USER=infra"` - мы запускаем kubespray от лица пользователя **infra**
 
-   > `--become --become-user=root` - это настройки Ansible для того, чтобы стать рутом на виртуалках.
+    > `-v /home/infra/.ssh/:/host_ssh` - указываем путь к ssh ключам пользователя **infra** на твоей машине. `/host_ssh` используется в `scripts/kubespray-entrypoint.sh`.
+
+    > `--become --become-user=root` - это настройки Ansible для того, чтобы стать рутом на виртуалках.
