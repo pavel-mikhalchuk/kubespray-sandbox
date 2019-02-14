@@ -1,0 +1,30 @@
+- name: Create Tiller Service Account
+  k8s:
+    state: "{{ tiller_state }}"
+    definition:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: tiller
+        namespace: kube-system
+
+- name: Make Tiller Cluster Admin
+  k8s:
+    state: "{{ tiller_state }}"
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: tiller
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: tiller
+          namespace: kube-system
+
+- name: init helm tiller
+  command: >
+    helm init --service-account tiller

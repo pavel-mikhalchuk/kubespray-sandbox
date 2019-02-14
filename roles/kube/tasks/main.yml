@@ -1,0 +1,14 @@
+- name: Get Helm Tiller Status
+  k8s_facts:
+    kind: Deployment
+    label_selectors:
+      - app = helm
+      - name = tiller
+    namespace: kube-system
+  register: tiller
+
+- name: Install Helm Tiller
+  import_tasks: tiller.yml
+  vars:
+    tiller_state: present
+  when: tiller.resources | length == 0
