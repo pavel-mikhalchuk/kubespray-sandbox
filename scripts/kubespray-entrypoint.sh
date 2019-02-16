@@ -2,6 +2,8 @@
 
 useradd -m ${USER}
 
+echo "$USER ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
+
 mkdir -p /home/${USER}/.ssh/
 
 cp /host_ssh/id_rsa /home/${USER}/.ssh/id_rsa
