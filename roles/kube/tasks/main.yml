@@ -1,19 +1,27 @@
-- debug:
-    var: inventory_dir
-
 - name: Check kube config in user home
   stat:
     path: ~/.kube/config
-  register: kube_config
+  register: kube_config_in_home
 
-# - name: Check kube config in ansible artifact dir
-#   stat:
-#     path: ...................
-#   register: kube_config_in_ansible
+- name: Check kube config in ansible artifact dir
+  stat:
+    path: {{ artifacts_dir }}/admin.conf
+  register: kube_config_in_ansible
+
+- debug:
+    var: kube_config_in_home
+
+- debug:
+    var: kube_config_in_ansible
 
 - fail:
-    msg: "Kube config is not found at '~/.kube/config'"
-  when: kube_config.stat.exists == False
+    msg: "Kube config is not found in both '~/.kube/config' and {{ artifacts_dir }}"
+  when: (kube_config_in_home.stat.exists == False and kube_config_in_ansible.stat.exists == False)
+
+- file:
+    src: '{{ kube_config_in_ansible }}'
+    dest: '{{ kube_config_in_home }}'
+  when: kube_config_in_home.stat.exists == False
 
 - name: Get helm tiller status
   k8s_facts:
