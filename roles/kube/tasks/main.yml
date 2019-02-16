@@ -3,7 +3,7 @@
     path: ~/.kube/config
   register: kube_config_in_home
 
-- name: Check kube config in ansible artifact dir
+- name: Check kube config in ansible artifacts dir
   stat:
     path: "/kubespray/artifacts/admin.conf"
   register: kube_config_in_ansible
@@ -15,12 +15,13 @@
     var: kube_config_in_ansible
 
 - fail:
-    msg: "Kube config is not found in both '~/.kube/config' and {{ artifacts_dir }}"
+    msg: "Kube config is not found in both '~/.kube/config' and /kubespray/artifacts/admin.conf"
   when: (kube_config_in_home.stat.exists == False and kube_config_in_ansible.stat.exists == False)
 
 - file:
     src: "{{ kube_config_in_ansible }}"
     dest: "{{ kube_config_in_home }}"
+    state: link
   when: kube_config_in_home.stat.exists == False
 
 - name: Get helm tiller status
