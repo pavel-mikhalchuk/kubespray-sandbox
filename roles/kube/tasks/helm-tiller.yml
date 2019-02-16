@@ -1,4 +1,4 @@
-- name: Create Tiller Service Account
+- name: Create tiller service account
   k8s:
     state: "{{ tiller_state }}"
     definition:
@@ -8,7 +8,7 @@
         name: tiller
         namespace: kube-system
 
-- name: Make Tiller Cluster Admin
+- name: Make tiller cluster admin
   k8s:
     state: "{{ tiller_state }}"
     definition:
@@ -25,6 +25,6 @@
           name: tiller
           namespace: kube-system
 
-- name: init helm tiller
+- name: Init helm tiller
   command: >
     helm init --service-account tiller

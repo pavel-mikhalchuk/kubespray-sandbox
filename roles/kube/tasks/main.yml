@@ -1,13 +1,21 @@
-- name: Check Kube Config
+- debug:
+  var: inventory_dir
+
+- name: Check kube config in user home
   stat:
     path: ~/.kube/config
   register: kube_config
+
+# - name: Check kube config in ansible artifact dir
+#   stat:
+#     path: ...................
+#   register: kube_config_in_ansible
 
 - fail:
     msg: "Kube config is not found at '~/.kube/config'"
   when: kube_config.stat.exists == False
 
-- name: Get Helm Tiller Status
+- name: Get helm tiller status
   k8s_facts:
     kind: Deployment
     label_selectors:
@@ -16,7 +24,7 @@
     namespace: kube-system
   register: tiller
 
-- name: Install Helm Tiller
+- name: Install helm tiller
   import_tasks: helm-tiller.yml
   vars:
     tiller_state: present
