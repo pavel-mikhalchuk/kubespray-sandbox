@@ -29,14 +29,17 @@ RUN curl -Lo /tmp/helm.tar.gz ${HELM_URL} \
 
 # Kubespray
 RUN mkdir /kubespray
-
 WORKDIR /kubespray
 
-COPY . .
+COPY ./kubespray ./kubespray
+COPY ./requirements.txt ./requirements.txt
 
-RUN /usr/bin/python -m pip install pip -U && \ 
+RUN /usr/bin/python -m pip install pip -U && \
   /usr/bin/python -m pip install -r kubespray/requirements.txt && \
   /usr/bin/python -m pip install -r requirements.txt
 # Kubespray
+
+# Copying other stuff besides kubespray
+COPY . .
 
 ENTRYPOINT [ "scripts/kubespray-entrypoint.sh" ]
