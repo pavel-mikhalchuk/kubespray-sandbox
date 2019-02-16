@@ -5,7 +5,7 @@ RUN apt update -y && \
   apt install -y sudo \
   libssl-dev python-dev sshpass apt-transport-https \
   ca-certificates curl gnupg2 software-properties-common \
-  python-pip openshift curl
+  python-pip curl
 # Ubuntu Packages
 
 # Docker
@@ -34,7 +34,9 @@ WORKDIR /kubespray
 
 COPY . .
 
-RUN /usr/bin/python -m pip install pip -U && /usr/bin/python -m pip install -r kubespray/requirements.txt
+RUN /usr/bin/python -m pip install pip -U && \ 
+  /usr/bin/python -m pip install -r kubespray/requirements.txt && \
+  /usr/bin/python -m pip install -r requirements.txt
 # Kubespray
 
 ENTRYPOINT [ "scripts/kubespray-entrypoint.sh" ]
