@@ -8,7 +8,7 @@
   register: tiller
 
 - name: Install Helm Tiller
-  import_tasks: tiller.yml
+  import_tasks: helm-tiller.yml
   vars:
     tiller_state: present
   when: tiller.resources | length == 0

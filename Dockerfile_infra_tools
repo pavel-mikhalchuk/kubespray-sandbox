@@ -1,22 +1,22 @@
 FROM alpine:3.8
 
 RUN apk add --no-cache --update \
-        build-base curl bash \
-        ca-certificates openssh-client openssl-dev \
-        python py-pip python-dev libffi-dev \
- && pip install --no-cache --upgrade pip==18.1 \
- && pip install --no-cache --upgrade \
-        ansible \
-        pyhelm \
-        openshift  \
- && rm -rf /var/cache/apk/*
+  build-base curl bash \
+  ca-certificates openssh-client openssl-dev \
+  python py-pip python-dev libffi-dev \
+  && pip install --no-cache --upgrade pip==18.1 \
+  && pip install --no-cache --upgrade \
+  ansible \
+  pyhelm \
+  openshift  \
+  && rm -rf /var/cache/apk/*
 
 ARG KUBECTL_VERSION=v1.13.1
 ENV KUBECTL_URL https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
 
 RUN set -xe \
- && curl -Lo /usr/bin/kubectl ${KUBECTL_URL} \
- && chmod +x /usr/bin/kubectl
+  && curl -Lo /usr/bin/kubectl ${KUBECTL_URL} \
+  && chmod +x /usr/bin/kubectl
 
 ARG HELM_VERSION=v2.12.0
 ENV HELM_URL https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz
