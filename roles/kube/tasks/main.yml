@@ -5,7 +5,7 @@
 
 - name: Check kube config in ansible artifact dir
   stat:
-    path: "{{ artifacts_dir }}/admin.conf"
+    path: "/kubespray/artifacts/admin.conf"
   register: kube_config_in_ansible
 
 - debug:
