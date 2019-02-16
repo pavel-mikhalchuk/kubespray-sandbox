@@ -1,5 +1,5 @@
 - debug:
-  var: inventory_dir
+    var: inventory_dir
 
 - name: Check kube config in user home
   stat:
