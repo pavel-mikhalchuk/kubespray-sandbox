@@ -1,7 +1,7 @@
 - name: Check Kube Config
-    stat:
-      path: ~/.kube/config
-    register: kube_config
+  stat:
+    path: ~/.kube/config
+  register: kube_config
 
 - fail:
     msg: "Kube config is not found at '~/.kube/config'"
