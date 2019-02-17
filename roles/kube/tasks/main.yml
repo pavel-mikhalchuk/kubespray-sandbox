@@ -19,11 +19,9 @@
   when: (kube_config_in_home.stat.exists == False and kube_config_in_ansible.stat.exists == False)
 
 - name: Create kube config link from ansible artifacts to user home
-  file:
+  copy:
     src: "{{ kube_config_in_ansible }}"
     dest: "{{ kube_config_in_home }}"
-    state: link
-    force: true
   when: kube_config_in_home.stat.exists == False
 
 - name: Get helm tiller status
