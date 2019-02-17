@@ -30,7 +30,7 @@
     dest: "{{ kube_config_in_home_path }}"
   when: (kube_config_in_home.stat.exists == False and kube_config_in_ansible.stat.exists == True)
 
-  - name: Get helm tiller status
+- name: Get helm tiller status
   k8s_facts:
     kind: Deployment
     label_selectors:
