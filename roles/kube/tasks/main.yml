@@ -1,7 +1,6 @@
-- name: Define kube config variables
-  vars:
-    kube_config_in_home_path: ~/.kube/config
-    kube_config_in_ansible_artifacts_path: /kubespray/artifacts/admin.conf
+vars:
+  kube_config_in_home_path: ~/.kube/config
+  kube_config_in_ansible_artifacts_path: /kubespray/artifacts/admin.conf
 
 - name: Check kube config in user home
   stat:
