@@ -17,9 +17,10 @@
 #remove
 
 - fail:
-    msg: "Kube config is not found in both '~/.kube/config' and /kubespray/artifacts/admin.conf"
+    msg: "Kube config is not found in both '{{ kube_config_in_home_path }}' and {{ kube_config_in_ansible_artifacts_path }}"
   when: (kube_config_in_home.stat.exists == False and kube_config_in_ansible.stat.exists == False)
 
+- name: Copy kube config from ansible artifacts to user home
   copy:
     src: "{{ kube_config_in_ansible_artifacts_path }}"
     dest: "{{ kube_config_in_home_path }}"
