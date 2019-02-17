@@ -13,7 +13,7 @@
   var: kube_config_in_home
 
 - debug:
-    var: kube_config_in_ansible
+  var: kube_config_in_ansible
 #remove
 
 - fail:
