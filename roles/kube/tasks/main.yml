@@ -1,30 +1,35 @@
+vars:
+  kube_config_in_home_path: ~/.kube/config
+  kube_config_in_ansible_artifacts_path: /kubespray/artifacts/admin.conf
+
 - name: Check kube config in user home
   stat:
-    path: ~/.kube/config
-  register: kube_config_in_home
+    path: {{ kube_config_in_home_path }}
+  register: kube_config_in_home_stat
 
 - name: Check kube config in ansible artifacts dir
   stat:
-    path: "/kubespray/artifacts/admin.conf"
-  register: kube_config_in_ansible
+    path: {{ kube_config_in_ansible_artifacts_path }}
+  register: kube_config_in_ansible_stat
 
-- debug:
+#remove
+  - debug:
     var: kube_config_in_home
 
 - debug:
     var: kube_config_in_ansible
+#remove
 
 - fail:
     msg: "Kube config is not found in both '~/.kube/config' and /kubespray/artifacts/admin.conf"
   when: (kube_config_in_home.stat.exists == False and kube_config_in_ansible.stat.exists == False)
 
-- name: Create kube config link from ansible artifacts to user home
   copy:
-    src: "{{ kube_config_in_ansible }}"
-    dest: "{{ kube_config_in_home }}"
-  when: kube_config_in_home.stat.exists == False
+    src: "{{ kube_config_in_ansible_artifacts_path }}"
+    dest: "{{ kube_config_in_home_path }}"
+  when: (kube_config_in_home.stat.exists == False and kube_config_in_ansible.stat.exists == True)
 
-- name: Get helm tiller status
+  - name: Get helm tiller status
   k8s_facts:
     kind: Deployment
     label_selectors:
