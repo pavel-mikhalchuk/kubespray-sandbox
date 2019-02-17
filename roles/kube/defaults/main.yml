@@ -1,3 +1,6 @@
 namespace_name: default
 # absent | present
 namespace_state: present
+
+kube_config_in_home_path: ~/.kube/config
+kube_config_in_ansible_artifacts_path: /kubespray/artifacts/admin.conf
