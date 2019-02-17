@@ -3,5 +3,5 @@ namespace_name: default
 namespace_state: present
 
 kube_dir_in_home_path: ~/.kube
-kube_config_in_home_path: {{ kube_dir_in_home_path }}/config
+kube_config_in_home_path: "{{ kube_dir_in_home_path }}/config"
 kube_config_in_ansible_artifacts_path: /kubespray/artifacts/admin.conf
