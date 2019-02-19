@@ -42,7 +42,7 @@
 
 - name: Copy kube config from user custom directory to user home
   copy:
-    src: "{{ kube_config_in_user_custom_dir_path_stat }}"
+    src: "{{ kube_config_in_user_custom_dir_path }}"
     dest: "{{ kube_config_in_home_path }}"
   when: (kube_config_in_home_stat.stat.exists == False and kube_config_in_user_custom_dir_path_stat.stat.exists == True)
 
