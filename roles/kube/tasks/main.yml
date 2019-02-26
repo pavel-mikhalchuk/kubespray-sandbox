@@ -16,5 +16,9 @@
     tiller_state: present
   when: tiller.resources | length == 0
 
+- name: Helm Repo Update.
+  command: helm repo update
+  changed_when: False
+
 - name: Nginx ingress controller
   import_tasks: nginx-ingress-controller.yml
