@@ -16,8 +16,8 @@
     tiller_state: present
   when: tiller.resources | length == 0
 
-- name: Helm Repo Update.
-  command: helm repo update
+- name: Helm Client Only.
+  command: helm init --client-only
   changed_when: False
 
 - name: Nginx ingress controller
