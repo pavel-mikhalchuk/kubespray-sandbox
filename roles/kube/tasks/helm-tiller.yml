@@ -8,7 +8,7 @@
         name: tiller
         namespace: kube-system
 
-- name: Make tiller cluster admin
+- name: Make tiller a cluster admin
   k8s:
     state: "{{ tiller_state }}"
     definition:
