@@ -6,8 +6,9 @@
 - name: Install Kube Dashboard.
   command: >
     helm install stable/kubernetes-dashboard 
-    --version 1.2.0
     --namespace kube-system
+    --name kube-dashboard
+    --version 1.2.0
     -f -
   args:
     stdin: |
