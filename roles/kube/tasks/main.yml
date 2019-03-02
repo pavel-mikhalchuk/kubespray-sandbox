@@ -4,5 +4,8 @@
 - name: Helm Init
   import_tasks: helm-init.yml
 
+- name: Kubernetes Dashboard
+  import_tasks: dashboard.yml
+
 - name: Nginx ingress controller
   import_tasks: nginx-ingress-controller.yml

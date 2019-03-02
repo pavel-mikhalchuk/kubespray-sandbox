@@ -7,10 +7,13 @@
     namespace: kube-system
   register: tiller
 
-- name: "Helm init: client + server"
+- name: "Helm init: client + tiller"
   import_tasks: helm-tiller.yml
   when: tiller.resources | length == 0
 
-- name: "Helm init: client only."
+- name: "Helm init: client only"
   command: helm init --client-only
   when: tiller.resources | length > 0
+
+- name: "Helm repo update"
+  command: helm repo update

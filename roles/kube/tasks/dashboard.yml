@@ -1,0 +1,8 @@
+- name: List installed Helm charts.
+  command: helm list
+  register: helm_list_results
+  changed_when: False
+
+- name: Install Kubernetes Dashboard helm chart
+  command: helm install stable/kubernetes-dashboard --version 1.2.0
+  when: "'kubernetes-dashboard' not in helm_list_results.stdout"
