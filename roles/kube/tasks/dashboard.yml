@@ -14,5 +14,5 @@
     stdin: |
       service:
         type: NodePort
-        nodePort: 33333
+        nodePort: 32222
   when: "'kubernetes-dashboard' not in helm_list_results.stdout"
