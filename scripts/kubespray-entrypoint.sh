@@ -1,16 +1,21 @@
-#!/bin/sh
+#!/bin/bash
 
 useradd -m ${USER}
 
 echo "$USER ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
 
 # SSH keys
-mkdir -p /home/${USER}/.ssh/
+if [ -d "/host_ssh/id_rsa" ];
+then
+    mkdir -p /home/${USER}/.ssh/
 
-cp /host_ssh/id_rsa /home/${USER}/.ssh/id_rsa
-chown ${USER}:${USER} /home/${USER}/.ssh/id_rsa
-cp /host_ssh/id_rsa.pub /home/${USER}/.ssh/id_rsa.pub
-chown ${USER}:${USER} /home/${USER}/.ssh/id_rsa.pub
+    cp /host_ssh/id_rsa /home/${USER}/.ssh/id_rsa
+    chown ${USER}:${USER} /home/${USER}/.ssh/id_rsa
+    cp /host_ssh/id_rsa.pub /home/${USER}/.ssh/id_rsa.pub
+    chown ${USER}:${USER} /home/${USER}/.ssh/id_rsa.pub
+else
+    echo "/host_ssh is not provided. Skipping SSH keys step."
+fi
 # SSH keys
 
 # Kube config
