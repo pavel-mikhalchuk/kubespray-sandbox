@@ -1,6 +1,6 @@
 - name: Create tiller service account
   k8s:
-    state: "{{ tiller_state }}"
+    state: "present"
     definition:
       apiVersion: v1
       kind: ServiceAccount
@@ -10,7 +10,7 @@
 
 - name: Make tiller a cluster admin
   k8s:
-    state: "{{ tiller_state }}"
+    state: "present"
     definition:
       apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRoleBinding

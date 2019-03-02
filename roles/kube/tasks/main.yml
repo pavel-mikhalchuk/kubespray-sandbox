@@ -1,24 +1,8 @@
 - name: Set up kube config
   import_tasks: kube-config.yml
 
-- name: Get helm tiller status
-  k8s_facts:
-    kind: Deployment
-    label_selectors:
-      - app = helm
-      - name = tiller
-    namespace: kube-system
-  register: tiller
-
-- name: Install helm tiller
-  import_tasks: helm-tiller.yml
-  vars:
-    tiller_state: present
-  when: tiller.resources | length == 0
-
-- name: Helm Client Only.
-  command: helm init --client-only
-  changed_when: False
+- name: Helm Init
+  import_tasks: helm-init.yml
 
 - name: Nginx ingress controller
   import_tasks: nginx-ingress-controller.yml
