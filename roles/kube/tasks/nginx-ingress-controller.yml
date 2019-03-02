@@ -7,7 +7,7 @@
   command: >
     helm install stable/nginx-ingress
     --namespace kube-system
-    --name nic
+    --name nginx-ingress
     -f -
   args:
     stdin: |
