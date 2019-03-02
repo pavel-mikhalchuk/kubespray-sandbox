@@ -7,7 +7,7 @@
   command: >
     helm install stable/kubernetes-dashboard 
     --namespace kube-system
-    --name kube-dashboard
+    --name kubernetes-dashboard
     --version 1.2.0
     -f -
   args:
