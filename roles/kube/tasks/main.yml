@@ -7,5 +7,5 @@
 - name: Kubernetes Dashboard
   import_tasks: dashboard.yml
 
-- name: Nginx ingress controller
+- name: Nginx Ingress Controller
   import_tasks: nginx-ingress-controller.yml

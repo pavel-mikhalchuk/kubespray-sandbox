@@ -3,7 +3,7 @@
   register: helm_list_results
   changed_when: False
 
-- name: Install nginx ingress controller.
+- name: Install Nginx Ingress Controller.
   command: >
     helm install stable/nginx-ingress
     --namespace kube-system

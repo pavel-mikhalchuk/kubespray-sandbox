@@ -3,7 +3,7 @@
   register: helm_list_results
   changed_when: False
 
-- name: Install nginx ingress controller.
+- name: Install Kube Dashboard.
   command: >
     helm install stable/kubernetes-dashboard 
     --version 1.2.0
