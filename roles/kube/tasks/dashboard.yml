@@ -3,6 +3,15 @@
   register: helm_list_results
   changed_when: False
 
-- name: Install Kubernetes Dashboard helm chart
-  command: helm install stable/kubernetes-dashboard --version 1.2.0
+- name: Install nginx ingress controller.
+  command: >
+    helm install stable/kubernetes-dashboard 
+    --version 1.2.0
+    --namespace kube-system
+    -f -
+  args:
+    stdin: |
+      service:
+        type: NodePort
+        nodePort: 33333
   when: "'kubernetes-dashboard' not in helm_list_results.stdout"

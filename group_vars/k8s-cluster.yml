@@ -1,3 +1,4 @@
 kube_network_plugin: weave
 kubeconfig_localhost: true
 kubectl_localhost: true
+dashboard_enabled: false
