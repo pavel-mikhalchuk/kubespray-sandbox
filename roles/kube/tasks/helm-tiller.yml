@@ -25,6 +25,6 @@
           name: tiller
           namespace: kube-system
 
-- name: Init helm tiller
+- name: "Helm init: client + tiller"
   command: >
     helm init --service-account tiller --wait
