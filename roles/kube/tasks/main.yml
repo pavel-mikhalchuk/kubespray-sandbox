@@ -1,6 +1,9 @@
 - name: Set up kube config
   import_tasks: kube-config.yml
 
+- name: Set up service accounts
+  import_tasks: service-accounts-for-the-team.yml
+
 - name: Helm Init
   import_tasks: helm-init.yml
 
