@@ -1,3 +1,2 @@
 - import_playbook: kubespray/cluster.yml
 - import_playbook: kube.yml
-  tags: ["k8s-apps"]

@@ -5,7 +5,7 @@ useradd -m ${USER}
 echo "$USER ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
 
 # SSH keys
-if [ -d "/host_ssh/id_rsa" ];
+if [ -d "/host_ssh" ];
 then
     mkdir -p /home/${USER}/.ssh/
 
