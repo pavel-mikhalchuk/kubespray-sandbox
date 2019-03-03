@@ -27,4 +27,4 @@
 
 - name: Init helm tiller
   command: >
-    helm init --service-account tiller
+    helm init --service-account tiller --wait
