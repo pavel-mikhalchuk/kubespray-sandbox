@@ -9,3 +9,6 @@
 
 - name: Nginx Ingress Controller
   import_tasks: nginx-ingress-controller.yml
+
+- name: Heapster
+  import_tasks: heapster.yml
