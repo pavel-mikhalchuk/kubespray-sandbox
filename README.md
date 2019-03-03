@@ -26,7 +26,7 @@
 
    Собираем docker образ:
 
-   > `docker build -t kubespray -f Dockerfile_kubespray.`
+   > `docker build -t kubespray -f Dockerfile_kubespray .`
 
 2. Запускаем kubespray:
 
