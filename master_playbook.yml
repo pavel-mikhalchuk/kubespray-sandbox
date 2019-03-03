@@ -1,2 +1,3 @@
 - import_playbook: kubespray/cluster.yml
 - import_playbook: kube.yml
+  tags: always
