@@ -7,11 +7,11 @@
 - name: Helm Init
   import_tasks: helm-init.yml
 
+- name: Heapster
+  import_tasks: heapster.yml
+
 - name: Kubernetes Dashboard
   import_tasks: dashboard.yml
 
 - name: Nginx Ingress Controller
   import_tasks: nginx-ingress-controller.yml
-
-- name: Heapster
-  import_tasks: heapster.yml
