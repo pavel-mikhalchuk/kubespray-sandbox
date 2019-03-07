@@ -20,4 +20,6 @@
             http: 32189
         stats:
           enabled: true
+        metrics:
+          enabled: true
   when: "'nginx-ingress' not in helm_list_results.stdout"
