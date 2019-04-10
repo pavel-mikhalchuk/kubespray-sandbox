@@ -1,0 +1,3 @@
+- hosts: nfs-server
+  roles:
+    - { role: "kubespray/roles/container-engine" }
