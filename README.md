@@ -4,7 +4,7 @@
 
 0. Тебе просто необходимо немного ознакомится с [Ansible](https://www.ansible.com/resources/get-started), чтобы научится читать структуру и имена папок и файлов этого проекта.
 
-1. Убедись, что ./kubespray гит подмодуль выкачан. Почитай как выкачивать пше sub-modules. [Тут](https://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules) или [тут](https://stackoverflow.com/questions/1030169/easy-way-to-pull-latest-of-all-git-submodules).
+1. Убедись, что ./kubespray git подмодуль выкачан. Почитай как выкачивать git sub-modules. [Тут](https://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules) или [тут](https://stackoverflow.com/questions/1030169/easy-way-to-pull-latest-of-all-git-submodules).
 
 1. Набор виртуалок с установленной Ubuntu 18.04.
 
