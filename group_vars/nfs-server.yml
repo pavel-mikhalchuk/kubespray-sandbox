@@ -1,1 +1,2 @@
 container_manager: docker
+dns_mode: none
