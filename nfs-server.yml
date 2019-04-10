@@ -1,3 +1,4 @@
 - hosts: nfs-server
+  gather_facts: false
   roles:
     - { role: "kubespray/roles/container-engine" }
