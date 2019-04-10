@@ -1,0 +1,17 @@
+- name: Ensure /nfs_exports exists
+  file:
+    path: /nfs_exports
+    state: directory
+
+- name: Run NFS server container
+  docker_container:
+    name: nfs-server
+    image: erichough/nfs-server
+    state: present
+    recreate: yes
+    network_mode: host
+    privileged: yes
+    env:
+      NFS_EXPORT_0: /exports *(rw,no_subtree_check)
+    volumes:
+      - /nfs_exports:/exports
