@@ -1,4 +1,5 @@
 - hosts: nfs-server
   gather_facts: false
   roles:
-    - { role: "kubespray/roles/container-engine" }
+    - { role: kubespray/roles/bootstrap-os }
+    - { role: kubespray/roles/container-engine }
