@@ -4,7 +4,7 @@
     version: "{{ item.version }}"
     state: "{{ item.state }}"
   with_items:
-    - { name: "docker-py", version: "3.7.2", state: "present" }
+    - { name: "docker-py", version: "1.10.6", state: "present" }
 
 - name: NFS Storage | Ensure /nfs_exports exists
   file:
