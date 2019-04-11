@@ -89,3 +89,9 @@
    > `docker run --rm -e "USER=infra" -v /home/infra/.ssh/:/host_ssh kubespray ansible-playbook --become --become-user=root master_playbook.yml --tags=client`
 
    Пояснения: т.е. сначала kubespray сам сходит на master ноду, заберет admin конфиг, мы его складываем в нужную папку в нашем docker контейнере и уже потом начинаем деплойменты описанные в `kube.yml`.
+
+## Разворачивание внекубового NFS сервера
+
+Для этого мы будем использовать плейбук `nfs-server.yml`.
+
+> `docker run --rm -e "USER=infra" -v /home/infra/.ssh/:/host_ssh kubespray ansible-playbook --become --become-user=root nfs-server.yml`
