@@ -1,4 +1,4 @@
-- name: NFS Storage | Install pip packages
+- name: Install pip packages
   pip:
     name: "{{ item.name }}"
     version: "{{ item.version }}"
@@ -6,16 +6,16 @@
   with_items:
     - { name: "docker-py", version: "1.10.6", state: "present" }
 
-- name: NFS Storage | Ensure /nfs_exports exists
+- name: Ensure /nfs_exports exists
   file:
     path: /nfs_exports
     state: directory
 
-- name: NFS Storage | Run NFS server container
+- name: Run NFS server container
   docker_container:
     name: nfs-server
     image: erichough/nfs-server
-    state: present
+    state: started
     recreate: yes
     network_mode: host
     privileged: yes
