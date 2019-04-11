@@ -11,6 +11,16 @@
     path: /nfs_exports
     state: directory
 
+- name: Enable nfs module
+  modprobe:
+    name: nfs
+    state: present
+
+- name: Enable nfsd module
+  modprobe:
+    name: nfsd
+    state: present
+
 - name: Run NFS server container
   docker_container:
     name: nfs-server
