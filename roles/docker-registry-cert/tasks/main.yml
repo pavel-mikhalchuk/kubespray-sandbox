@@ -1,0 +1,10 @@
+- name: Ensure '/etc/docker/certs.d/dockerhub.alutech.local' exists
+  file:
+    path: "/etc/docker/certs.d/dockerhub.alutech.local"
+    state: directory
+    mode: 0755
+
+- name: Install 'dockerhub.alutech.local' self-signed Cert
+  copy:
+    src: ca.crt
+    dest: /etc/docker/certs.d/dockerhub.alutech.local/ca.crt

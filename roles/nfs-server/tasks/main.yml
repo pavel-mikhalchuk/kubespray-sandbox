@@ -30,6 +30,6 @@
     network_mode: host
     privileged: yes
     env:
-      NFS_EXPORT_0: /exports *(rw,no_subtree_check)
+      NFS_EXPORT_0: /exports *(rw,no_subtree_check,fsid=0)
     volumes:
       - /nfs_exports:/exports

@@ -1,3 +1,8 @@
 - import_playbook: kubespray/cluster.yml
+  tags: always
+- import_playbook: docker-registry-cert.yml
+  tags: always
+- import_playbook: nfs-client.yml
+  tags: always
 - import_playbook: kube.yml
   tags: always

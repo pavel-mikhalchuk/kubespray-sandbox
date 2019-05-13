@@ -1,0 +1,22 @@
+- name: List installed Helm charts
+  command: helm list
+  register: helm_list_results
+  changed_when: False
+
+- name: Install NFS Server Provisioner
+  command: >
+    helm install stable/nfs-server-provisioner
+    --namespace storage
+    --name nfs-server-provisioner
+    --version 0.3.0
+    -f -
+  args:
+    stdin: |
+      resources:
+        requests:
+          cpu: "200m"
+          memory: 200Mi
+        limits:
+          cpu: "1"
+          memory: 1Gi
+  when: "'nfs-server-provisioner' not in helm_list_results.stdout"

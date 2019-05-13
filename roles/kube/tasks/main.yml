@@ -15,3 +15,12 @@
 
 - name: Nginx Ingress Controller
   import_tasks: nginx-ingress-controller.yml
+
+- name: NFS Dynamic Provisioner
+  import_tasks: nfs-server-provisioner.yml
+
+- name: Jenkins
+  import_tasks: jenkins.yml
+
+- name: Jenkins
+  import_tasks: jenkins.1.yml

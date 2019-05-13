@@ -8,5 +8,11 @@
     helm install stable/heapster
     --namespace kube-system
     --name heapster
-    --version 0.3.2
+    --version 0.3.3
+    -f -
+  args:
+    stdin: |
+      command:
+      - "/heapster"
+      - "--source=kubernetes.summary_api:''?useServiceAccount=true&kubeletHttps=true&kubeletPort=10250&insecure=true"
   when: "'heapster' not in helm_list_results.stdout"

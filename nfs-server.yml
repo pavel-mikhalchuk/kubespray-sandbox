@@ -3,4 +3,4 @@
   roles:
     - role: kubespray/roles/bootstrap-os
     - role: kubespray/roles/container-engine
-    - role: nfs
+    - role: nfs-server

@@ -1,0 +1,9 @@
+- name: Install NFS Common Package
+  action:
+    module: "{{ ansible_pkg_mgr }}"
+    name: "nfs-common"
+    state: latest
+  register: pkgs_task_result
+  until: pkgs_task_result is succeeded
+  retries: 4
+  delay: "{{ 5 | random + 3 }}"

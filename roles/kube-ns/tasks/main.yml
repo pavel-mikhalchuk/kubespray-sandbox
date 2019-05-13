@@ -1,0 +1,7 @@
+- name: Create Kubernetes Namespace
+  command: kubectl create namespace "{{ns}}"
+  ignore_errors: true
+
+- name: Create Docker Registry Secret for the Namespace
+  command: kubectl -n "{{ ns }}" create secret docker-registry dockerhub-alutech-local --docker-server=dockerhub.alutech.local --docker-username="{{ docker_registry_username }}" --docker-password="{{ docker_registry_pwd }}" --docker-email=bondar@alutech-mc.com
+  ignore_errors: true
