@@ -104,6 +104,20 @@
           namespace: jenkins
   when: "'jenkins' not in helm_list_results.stdout"
 
+- name: Create Jenkins Secret with K8S cluster metadata
+  k8s:
+    state: "present"
+    definition:
+      apiVersion: v1
+      data:
+        base_domain: "{{ base_domain | b64encode }}"
+      kind: Secret
+      metadata:
+        name: cluster-metadata
+        namespace: jenkins
+      type: Opaque
+  when: "'jenkins' not in helm_list_results.stdout"
+
 - name: Install Jenkins.
   command: >
     helm install stable/jenkins
@@ -117,7 +131,14 @@
         serviceType: ClusterIP
         ingress: 
           enabled: true
-          hostName: jenkins.alutech.local
+          hostName: "jenkins.{{ base_domain }}"
+        resources:
+          requests: 
+            cpu: 50m
+            memory: 1024Mi
+          limits: 
+            cpu: 2000m
+            memory: 4096Mi
       serviceAccountAgent:
         name: jenkins-agent
       persistence:

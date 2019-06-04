@@ -3,3 +3,5 @@
   gather_facts: no
   roles:
     - role: kube
+  vars:
+    base_domain: kube-dev.in.alutech24.com

@@ -21,6 +21,3 @@
 
 - name: Jenkins
   import_tasks: jenkins.yml
-
-- name: Jenkins
-  import_tasks: jenkins.1.yml
