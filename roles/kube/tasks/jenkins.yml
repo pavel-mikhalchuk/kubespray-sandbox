@@ -127,7 +127,8 @@
     -f -
   args:
     stdin: |
-      master: 
+      master:
+        imageTag: 2.164 
         serviceType: ClusterIP
         ingress: 
           enabled: true
