@@ -90,6 +90,16 @@
 
    Пояснения: т.е. сначала kubespray сам сходит на master ноду, заберет admin конфиг, мы его складываем в нужную папку в нашем docker контейнере и уже потом начинаем деплойменты описанные в `kube.yml`.
 
+## Уничтожение kubernetes кластера
+
+Для этого мы будем использовать плейбук `kubespray/reset.yml`.
+
+> `docker run --rm -e "USER=infra" -v /home/infra/.ssh/:/host_ssh kubespray ansible-playbook --become --become-user=root -e reset_confirmation=yes --flush-cache kubespray/reset.yml`
+
+Не вдаваясь в подробности этот плейбук сносит docker и kubelet сервисы. В итоге все запущеное на нодах, что связаное с kubernetes останавливается. 
+
+За более подбродной информацией смотрите плейбук.
+
 ## Разворачивание внекубового NFS сервера
 
 Для этого мы будем использовать плейбук `nfs-server.yml`.
