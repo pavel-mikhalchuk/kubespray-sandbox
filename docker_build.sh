@@ -1,0 +1,1 @@
+docker build -t kubespray -f Dockerfile_kubespray .

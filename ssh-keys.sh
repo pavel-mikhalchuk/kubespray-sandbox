@@ -29,16 +29,6 @@ if [[ -z "$NODE_PASSWORD" ]]; then
     exit 1
 fi
 
-echo "User: $USER"
-echo "Pswd: $NODE_PASSWORD"
+mkdir -p $(pwd)/generated/ssh_keys
 
-mkdir ~/.ssh
-mkdir /generated_ssh_key
-
-echo -e 'y\n' | ssh-keygen -b 2048 -t rsa -f "/generated_ssh_key/${USER}_rsa" -q -N ""
-echo "Keys are generated"
-echo "Now copying keys to nodes..."
-
-for ip in `cat ssh-utils/keys/hosts_where_to_copy_ssh_keys`; do
-    sshpass -p ${NODE_PASSWORD} ssh-copy-id -o StrictHostKeyChecking=no -i "/generated_ssh_key/${USER}_rsa.pub" ${USER}@$ip
-done
+docker run --rm --network=host -e "USER=${USER}" -v $(pwd)/generated/ssh_keys:/generated_ssh_key kubespray sh -c "ssh-utils/keys/copy-ssh-keys.sh -u=${USER} -p=${NODE_PASSWORD}"
