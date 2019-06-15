@@ -21,4 +21,4 @@ fi
 
 echo "User: $USER"
 
-docker run --rm --network=host -e "USER=${USER}" -v $(pwd)/generated/kube_files:/host_kube_config kubespray ansible-playbook kube.yml
+docker run --rm --network=host -e "USER=${USER}" -v $(pwd)/generated/kube_files:/kubespray/artifacts kubespray ansible-playbook kube.yml
