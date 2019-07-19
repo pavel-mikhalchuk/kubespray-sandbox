@@ -19,5 +19,17 @@
 - name: NFS Dynamic Provisioner
   import_tasks: nfs-server-provisioner.yml
 
+- name: Local Storage Setup
+  import_tasks: local-storage.yml
+
 - name: Jenkins
   import_tasks: jenkins.yml
+
+# - name: Prometheus, Alert Manager, Grafana
+  # import_tasks: prometheus-monitoring.yml
+
+- name: ELK stack
+  import_tasks: elk-stack-logging.yml
+
+- name: Sentry
+  import_tasks: sentry.yml

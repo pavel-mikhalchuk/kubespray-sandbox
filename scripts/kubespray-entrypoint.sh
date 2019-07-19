@@ -24,7 +24,8 @@ fi
 mkdir -p /home/${USER}/.kube/
 
 cp /host_kube_config/config /home/${USER}/.kube/config 2>/dev/null
-chown ${USER}:${USER} /home/${USER}/.kube/config 2>/dev/null
+
+chown -R ${USER}:${USER} /home/${USER}/.kube/
 # Kube config
 
 # Get permissions for kubespray folder so ansible .retry file can be written 

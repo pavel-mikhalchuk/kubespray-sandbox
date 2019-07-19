@@ -1,0 +1,27 @@
+- name: Install Jenkins.
+  command: >
+    helm install stable/prometheus-operator
+    --namespace monitoring
+    --name my-release
+    --version 1.1.16
+    -f -
+  args:
+    stdin: |
+      master:
+        imageTag: 2.164 
+        serviceType: ClusterIP
+        ingress: 
+          enabled: true
+          hostName: "jenkins.{{ base_domain }}"
+        resources:
+          requests: 
+            cpu: 50m
+            memory: 1024Mi
+          limits: 
+            cpu: 2000m
+            memory: 4096Mi
+      serviceAccountAgent:
+        name: jenkins-agent
+      persistence:
+        existingClaim: jenkins
+  when: "'jenkins' not in helm_list_results.stdout"

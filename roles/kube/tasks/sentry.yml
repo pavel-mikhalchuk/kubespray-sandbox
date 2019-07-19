@@ -1,0 +1,31 @@
+- name: Install Sentry.
+  command: >
+    helm install stable/sentry
+    --namespace logging
+    --name sentry
+    --version 2.0.1
+    -f -
+  args:
+    stdin: |
+      worker:
+        replicacount: 1
+      service:
+        type: ClusterIP
+      filestore:
+        filesystem:
+          persistence:
+            enabled: true
+            storageClass: "sentry-storage"
+      postgresql:
+        persistence:
+          enabled: true
+          storageClass: "sentry-storage"
+      redis:
+        master:
+          persistence:
+            enabled: true
+            storageClass: "sentry-storage"
+      ingress:
+        enabled: true
+        hostname: "sentry.{{ base_domain }}"
+  when: "'sentry' not in helm_list_results.stdout"
