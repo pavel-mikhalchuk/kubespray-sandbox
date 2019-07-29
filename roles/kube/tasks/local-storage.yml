@@ -29,7 +29,7 @@
         persistentVolumeReclaimPolicy: Retain
         storageClassName: local-storage
         local:
-          path: /var/kubernetes-local-storage
+          path: /var/kubernetes-local-storage/elk
         nodeAffinity:
           required:
             nodeSelectorTerms:
@@ -56,7 +56,7 @@
         persistentVolumeReclaimPolicy: Retain
         storageClassName: local-storage
         local:
-          path: /var/kubernetes-local-storage
+          path: /var/kubernetes-local-storage/elk
         nodeAffinity:
           required:
             nodeSelectorTerms:
@@ -83,7 +83,7 @@
         persistentVolumeReclaimPolicy: Retain
         storageClassName: local-storage
         local:
-          path: /var/kubernetes-local-storage
+          path: /var/kubernetes-local-storage/elk
         nodeAffinity:
           required:
             nodeSelectorTerms:
@@ -110,7 +110,7 @@
         persistentVolumeReclaimPolicy: Retain
         storageClassName: local-storage
         local:
-          path: /var/kubernetes-local-storage
+          path: /var/kubernetes-local-storage/elk
         nodeAffinity:
           required:
             nodeSelectorTerms:
