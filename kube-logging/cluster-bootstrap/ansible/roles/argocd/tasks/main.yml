@@ -4,3 +4,6 @@
 
 - name: Deploy Argo CD
   command: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v1.1.2/manifests/install.yaml
+
+- name: Install Argo CD CLI
+  command: curl -Lo /usr/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v1.1.2/argocd-linux-amd64 && chmod +x /usr/bin/argocd
