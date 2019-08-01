@@ -15,7 +15,7 @@ spec:
     targetRevision: HEAD
     path: kube-logging/cluster-state/sentry
     helm: 
-      releaseName: sentry-wip-001
+      releaseName: sentry
   syncPolicy:
     automated:
       prune: true
