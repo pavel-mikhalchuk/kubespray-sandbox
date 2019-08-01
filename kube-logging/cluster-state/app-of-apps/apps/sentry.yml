@@ -14,6 +14,8 @@ spec:
     repoURL: https://github.com/pavel-mikhalchuk/kubespray-sandbox
     targetRevision: HEAD
     path: kube-logging/cluster-state/sentry
+    helm: 
+      releaseName: sentry-wip-001
   syncPolicy:
     automated:
       prune: true

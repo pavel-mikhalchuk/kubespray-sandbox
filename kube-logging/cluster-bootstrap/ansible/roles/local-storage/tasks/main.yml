@@ -1,0 +1,8 @@
+- name: Create /var/kubernetes-local-storage/ folder
+  command: mkdir -p /var/kubernetes-local-storage/
+
+- name: Create local storage folder for sentry
+  command: >
+    mkdir -p /var/kubernetes-local-storage/sentry/1
+    mkdir -p /var/kubernetes-local-storage/sentry/2
+    mkdir -p /var/kubernetes-local-storage/sentry/3
