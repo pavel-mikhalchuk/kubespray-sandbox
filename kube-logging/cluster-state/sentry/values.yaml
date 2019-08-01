@@ -16,6 +16,7 @@ super-sentry:
       persistence:
         enabled: false
         storageClass: "sentry-storage"
+        resourcePolicy: nil
     redis:
       master:
         persistence:
