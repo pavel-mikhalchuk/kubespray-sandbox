@@ -23,4 +23,4 @@ sentry:
         storageClass: "sentry-storage"
   ingress:
     enabled: true
-    hostname: "sentry.{{ base_domain }}"
+    hostname: "sentry.logging.in.alutech24.com"
