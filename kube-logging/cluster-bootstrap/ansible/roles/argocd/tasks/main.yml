@@ -29,6 +29,10 @@
         creates: "{{ argocd_tunnel_pid_file }}"
       changed_when: false
 
+    - name: Wait for tunnel to establish
+      pause:
+        seconds: 5
+
     - name: Login to Argo CD
       command: "argocd login localhost:8080 --name=admin --password={{ argocd_password.stdout }} --insecure"
 
