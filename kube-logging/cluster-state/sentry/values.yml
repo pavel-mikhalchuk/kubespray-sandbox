@@ -1,0 +1,25 @@
+sentry:
+  image:
+    tag: "9.0"
+  worker:
+    replicacount: 1
+  service:
+    type: ClusterIP
+  filestore:
+    filesystem:
+      persistence:
+        enabled: true
+        storageClass: "sentry-storage"
+  postgresql:
+    imageTag: "9.5"
+    persistence:
+      enabled: true
+      storageClass: "sentry-storage"
+  redis:
+    master:
+      persistence:
+        enabled: true
+        storageClass: "sentry-storage"
+  ingress:
+    enabled: true
+    hostname: "sentry.{{ base_domain }}"
