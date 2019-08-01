@@ -13,6 +13,7 @@ sentry:
         size: 2Gi
   postgresql:
     imageTag: "9.5"
+    imagePullPolicy: IfNotPresent
     persistence:
       enabled: true
       storageClass: "sentry-storage"
