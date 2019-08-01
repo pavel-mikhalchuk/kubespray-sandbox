@@ -43,6 +43,7 @@
           --path guestbook
           --dest-server https://kubernetes.default.svc
           --dest-namespace default
+          --sync-policy automated
 
   always:
     - name: Tear down the tunnel to Argo CD
