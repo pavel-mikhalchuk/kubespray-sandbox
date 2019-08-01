@@ -9,18 +9,18 @@ super-sentry:
     filestore:
       filesystem:
         persistence:
-          enabled: true
-          # storageClass: "sentry-storage"
+          enabled: false
+          storageClass: "sentry-storage"
     postgresql:
       imageTag: "9.5"
       persistence:
-        enabled: true
-        # storageClass: "sentry-storage"
+        enabled: false
+        storageClass: "sentry-storage"
     redis:
       master:
         persistence:
-          enabled: true
-          # storageClass: "sentry-storage"
+          enabled: false
+          storageClass: "sentry-storage"
     ingress:
       enabled: true
       hostname: "sentry.{{ base_domain }}"
