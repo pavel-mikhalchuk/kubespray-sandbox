@@ -31,10 +31,10 @@
 
     - name: Wait for tunnel to establish
       pause:
-        seconds: 5
+        seconds: 2
 
     - name: Login to Argo CD
-      command: "argocd login localhost:8080 --name=admin --password={{ argocd_password.stdout }} --insecure"
+      command: "argocd login localhost:8080 --username=admin --password={{ argocd_password.stdout }} --insecure"
 
     - name: Register App of Apps
       command: > 
