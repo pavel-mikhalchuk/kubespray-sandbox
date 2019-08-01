@@ -30,7 +30,7 @@
       changed_when: false
 
     - name: Login to Argo CD
-      command: "argocd login --name=admin --password={{ argocd_password.stdout }}"
+      command: "argocd login http://localhost:8080 --name=admin --password={{ argocd_password.stdout }}"
 
     - name: Register App of Apps
       command: > 
