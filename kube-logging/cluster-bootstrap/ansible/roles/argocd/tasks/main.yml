@@ -10,3 +10,11 @@
     url: https://github.com/argoproj/argo-cd/releases/download/v1.1.2/argocd-linux-amd64
     dest: /usr/bin/argocd
     mode: '0755'
+
+- name: Get password for Argo CD Login
+  shell: kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
+  register: argocd_password
+
+- name: Print password
+  debug:
+    msg: "Password - {{ argocd_password }}"
