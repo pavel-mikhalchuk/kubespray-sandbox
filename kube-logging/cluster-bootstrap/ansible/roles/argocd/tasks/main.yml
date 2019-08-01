@@ -31,7 +31,7 @@
 
     - name: Wait for tunnel to establish
       pause:
-        seconds: 2
+        seconds: 5
 
     - name: Login to Argo CD
       command: "argocd login localhost:8080 --username=admin --password={{ argocd_password.stdout }} --insecure"
