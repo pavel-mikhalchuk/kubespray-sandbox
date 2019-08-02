@@ -10,21 +10,21 @@ sentry:
       persistence:
         enabled: true
         storageClass: "sentry-storage"
-        size: 2Gi
+        size: 10Gi
   postgresql:
     imageTag: "9.5"
     imagePullPolicy: IfNotPresent
     persistence:
       enabled: true
       storageClass: "sentry-storage"
-      size: 2Gi
+      size: 10Gi
       resourcePolicy: "nil"
   redis:
     master:
       persistence:
         enabled: true
         storageClass: "sentry-storage"
-        size: 2Gi
+        size: 10Gi
   ingress:
     enabled: true
     hostname: "sentry.logging.in.alutech24.com"
