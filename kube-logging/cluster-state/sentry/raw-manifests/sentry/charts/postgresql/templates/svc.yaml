@@ -14,7 +14,7 @@ spec:
   ports:
   - name: postgresql
     port: 5432
-    targetPort: postgresqlq
+    targetPort: postgresql
   selector:
     app: postgresql
     release: sentry
