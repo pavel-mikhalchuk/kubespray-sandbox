@@ -30,6 +30,3 @@
 
 - name: ELK stack
   import_tasks: elk-stack-logging.yml
-
-- name: Sentry
-  import_tasks: sentry.yml
