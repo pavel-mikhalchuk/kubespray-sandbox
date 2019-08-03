@@ -60,9 +60,9 @@ spec:
         - name: SENTRY_REDIS_PORT
           value: "6379"
         - name: SENTRY_EMAIL_HOST
-          value: "smtp"
+          value: ""
         - name: SENTRY_EMAIL_PORT
-          value: "25"
+          value: ""
         - name: SENTRY_EMAIL_USER
           value: ""
         - name: SENTRY_EMAIL_PASSWORD
@@ -71,9 +71,9 @@ spec:
               name: sentry
               key: smtp-password
         - name: SENTRY_EMAIL_USE_TLS
-          value: "false"
+          value: "true"
         - name: SENTRY_SERVER_EMAIL
-          value: "sentry@sentry.local"
+          value: "noreply@alutech24.com"
         volumeMounts:
         - mountPath: /etc/sentry
           name: config

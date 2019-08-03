@@ -13,10 +13,6 @@ spec:
   replicas: 1
   template:
     metadata:
-      annotations:
-        metrics-enabled: "false"
-        checksum/configYml: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-        checksum/sentryConfPy: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
         app: sentry
         release: "sentry"
@@ -57,26 +53,24 @@ spec:
         - name: SENTRY_REDIS_PORT
           value: "6379"
         - name: SENTRY_EMAIL_HOST
-          value: "smtp"
+          value: "owa.alutech-mc.com"
         - name: SENTRY_EMAIL_PORT
-          value: "25"
+          value: "587"
         - name: SENTRY_EMAIL_USER
-          value: ""
+          value: "alutech\\sap-portal-noreply"
         - name: SENTRY_EMAIL_PASSWORD
           valueFrom:
             secretKeyRef:
               name: sentry
               key: smtp-password
         - name: SENTRY_EMAIL_USE_TLS
-          value: "false"
+          value: "true"
         - name: SENTRY_SERVER_EMAIL
-          value: "sentry@sentry.local"
-        
+          value: "noreply@alutech24.com"
         - name: GITHUB_APP_ID
           value: null
         - name: GITHUB_API_SECRET
           value: null
-        
         volumeMounts:
         - mountPath: /etc/sentry
           name: config
@@ -110,7 +104,6 @@ spec:
             requests:
               cpu: 300m
               memory: 300Mi
-            
       volumes:
       - name: config
         configMap:
