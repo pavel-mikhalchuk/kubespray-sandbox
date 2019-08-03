@@ -1,0 +1,22 @@
+---
+# Source: sentry/templates/web-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sentry
+  annotations:
+  labels:
+    app: sentry
+    chart: "sentry-2.0.0"
+    release: "sentry"
+    heritage: "Tiller"
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 9000
+    targetPort: 9000
+    protocol: TCP
+    name: sentry
+  selector:
+    app: sentry
+    role: web

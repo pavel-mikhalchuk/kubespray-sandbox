@@ -1,0 +1,19 @@
+---
+# Source: sentry/charts/postgresql/templates/pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: sentry-postgresql
+  labels:
+    app: postgresql
+    chart: postgresql-0.18.0
+    release: sentry
+    heritage: Tiller
+  annotations:
+    "helm.sh/resource-policy": 
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "8Gi"

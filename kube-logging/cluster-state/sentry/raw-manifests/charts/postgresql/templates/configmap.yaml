@@ -1,0 +1,12 @@
+---
+# Source: sentry/charts/postgresql/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sentry-postgresql
+  labels:
+    app: postgresql
+    chart: postgresql-0.18.0
+    release: sentry
+    heritage: Tiller
+data:
