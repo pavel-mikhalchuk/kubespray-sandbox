@@ -14,8 +14,8 @@ spec:
     repoURL: https://github.com/pavel-mikhalchuk/kubespray-sandbox
     targetRevision: HEAD
     path: kube-logging/cluster-state/sentry/raw-manifests
-    helm: 
-      releaseName: sentry
+    directory: 
+      recurse: true
   syncPolicy:
     automated:
       prune: true
