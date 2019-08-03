@@ -1,0 +1,21 @@
+---
+# Source: sentry/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: sentry
+ labels:
+    app: sentry
+    chart: "sentry-2.0.0"
+    release: "sentry"
+    heritage: "Tiller"
+ annotations:
+spec:
+  rules:
+    - host: sentry.logging.in.alutech24.com
+      http:
+        paths:
+          - path: "/"
+            backend:
+              serviceName: sentry
+              servicePort: 9000

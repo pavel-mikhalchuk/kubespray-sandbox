@@ -10,10 +10,11 @@ metadata:
     release: sentry
     heritage: Tiller
   annotations:
-    "helm.sh/resource-policy": 
+    "helm.sh/resource-policy": nil
 spec:
   accessModes:
     - "ReadWriteOnce"
   resources:
     requests:
-      storage: "8Gi"
+      storage: "10Gi"
+  storageClassName: "sentry-storage"

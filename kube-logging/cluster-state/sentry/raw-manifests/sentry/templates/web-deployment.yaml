@@ -1,9 +1,9 @@
 ---
-# Source: sentry/templates/cron-deployment.yaml
+# Source: sentry/templates/web-deployment.yaml
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: sentry-cron
+  name: sentry-web
   labels:
     app: sentry
     chart: "sentry-2.0.0"
@@ -20,13 +20,12 @@ spec:
       labels:
         app: sentry
         release: "sentry"
-        role: cron
+        role: web
     spec:
       containers:
-      - name: sentry-cron
-        image: "sentry:9.1.1"
+      - name: sentry-web
+        image: "sentry:9.0"
         imagePullPolicy: IfNotPresent
-        args: ["run", "cron"]
         ports:
         - containerPort: 9000
         env:
@@ -72,24 +71,50 @@ spec:
           value: "false"
         - name: SENTRY_SERVER_EMAIL
           value: "sentry@sentry.local"
+        
+        - name: GITHUB_APP_ID
+          value: null
+        - name: GITHUB_API_SECRET
+          value: null
+        
         volumeMounts:
         - mountPath: /etc/sentry
           name: config
           readOnly: true
         - mountPath: /var/lib/sentry/files
           name: sentry-data
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /_health/
+            port: 9000
+            scheme: HTTP
+          initialDelaySeconds: 50
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /_health/
+            port: 9000
+            scheme: HTTP
+          initialDelaySeconds: 50
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
         resources:
             limits:
-              cpu: 200m
-              memory: 200Mi
+              cpu: 500m
+              memory: 500Mi
             requests:
-              cpu: 100m
-              memory: 100Mi
+              cpu: 300m
+              memory: 300Mi
             
       volumes:
       - name: config
         configMap:
           name: sentry
       - name: sentry-data
-        emptyDir: {}
-      
+        persistentVolumeClaim:
+          claimName: sentry

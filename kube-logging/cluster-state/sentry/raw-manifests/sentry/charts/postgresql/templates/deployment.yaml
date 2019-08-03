@@ -24,8 +24,8 @@ spec:
     spec:
       containers:
       - name: sentry-postgresql
-        image: "postgres:9.6"
-        imagePullPolicy: ""
+        image: "postgres:9.5"
+        imagePullPolicy: "IfNotPresent"
         args:
         env:
         - name: POSTGRES_USER

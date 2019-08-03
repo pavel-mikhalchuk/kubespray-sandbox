@@ -1,35 +1,34 @@
 ---
-# Source: sentry/templates/hooks/user-create.job.yaml
-apiVersion: batch/v1
-kind: Job
+# Source: sentry/templates/cron-deployment.yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
-  name: "sentry-user-create"
+  name: sentry-cron
   labels:
     app: sentry
     chart: "sentry-2.0.0"
     release: "sentry"
     heritage: "Tiller"
-  annotations:
-    # This is what defines this resource as a hook. Without this line, the
-    # job is considered part of the release.
-    argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
-    "helm.sh/hook": post-install
-    "helm.sh/hook-delete-policy": "hook-succeeded,before-hook-creation"
-    "helm.sh/hook-weight": "5"
 spec:
+  replicas: 1
   template:
     metadata:
-      name: "sentry-user-create"
+      annotations:
+        metrics-enabled: "false"
+        checksum/configYml: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        checksum/sentryConfPy: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
         app: sentry
         release: "sentry"
+        role: cron
     spec:
-      restartPolicy: Never
       containers:
-      - name: user-create-job
-        image: "sentry:9.1.1"
-        command: ["sentry","createuser","--no-input","--email", "admin@sentry.local", "--superuser","--password","$(SENTRY_USER_PASSWORD)"]
+      - name: sentry-cron
+        image: "sentry:9.0"
+        imagePullPolicy: IfNotPresent
+        args: ["run", "cron"]
+        ports:
+        - containerPort: 9000
         env:
         - name: SENTRY_SECRET_KEY
           valueFrom:
@@ -59,9 +58,9 @@ spec:
         - name: SENTRY_REDIS_PORT
           value: "6379"
         - name: SENTRY_EMAIL_HOST
-          value: ""
+          value: "smtp"
         - name: SENTRY_EMAIL_PORT
-          value: ""
+          value: "25"
         - name: SENTRY_EMAIL_USER
           value: ""
         - name: SENTRY_EMAIL_PASSWORD
@@ -69,11 +68,6 @@ spec:
             secretKeyRef:
               name: sentry
               key: smtp-password
-        - name: SENTRY_USER_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: sentry
-              key: user-password
         - name: SENTRY_EMAIL_USE_TLS
           value: "false"
         - name: SENTRY_SERVER_EMAIL
@@ -82,7 +76,20 @@ spec:
         - mountPath: /etc/sentry
           name: config
           readOnly: true
+        - mountPath: /var/lib/sentry/files
+          name: sentry-data
+        resources:
+            limits:
+              cpu: 200m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            
       volumes:
       - name: config
         configMap:
           name: sentry
+      - name: sentry-data
+        emptyDir: {}
+      

@@ -29,7 +29,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: db-init-job
-        image: "sentry:9.1.1"
+        image: "sentry:9.0"
         command: ["sentry","upgrade","--noinput"]
         env:
         - name: SENTRY_SECRET_KEY
