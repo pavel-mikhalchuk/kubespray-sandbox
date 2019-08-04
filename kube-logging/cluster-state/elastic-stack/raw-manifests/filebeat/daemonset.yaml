@@ -46,9 +46,9 @@ spec:
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
-      - name: varlibpods
+      - name: varlibcontainers
         hostPath:
-          path: /var/lib/pods
+          path: /var/lib/containers
       - name: varrundockersock
         hostPath:
           path: /var/run/docker.sock
@@ -116,8 +116,8 @@ spec:
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
-        - name: varlibpods
-          mountPath: /var/lib/pods
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
           readOnly: true
         # Necessary when using autodiscovery; avoid mounting it otherwise
         # See: https://www.elastic.co/guide/en/beats/filebeat/master/configuration-autodiscover.html
