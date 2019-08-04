@@ -23,6 +23,10 @@ data:
       - add_host_metadata: ~
       - add_kubernetes_metadata:
           in_cluster: true
+          default_matchers.enabled: false
+          matchers:
+          - logs_path:
+              logs_path: /var/log/containers/
     output.elasticsearch:
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
     setup.template.settings:
