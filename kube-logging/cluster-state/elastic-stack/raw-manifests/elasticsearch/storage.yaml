@@ -2,14 +2,14 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: elasticsearch
+  name: elasticsearch-storage
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: elasticsearch
+  name: elasticsearch-pv
 spec:
   capacity:
     storage: 500Gi
@@ -17,7 +17,7 @@ spec:
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: elasticsearch
+  storageClassName: elasticsearch-storage
   local:
     path: /var/kubernetes-local-storage/elasticsearch
   nodeAffinity:

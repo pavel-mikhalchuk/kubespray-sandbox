@@ -30,7 +30,7 @@ spec:
       resources:
         requests:
           storage: 500Gi
-      
+      storageClassName: "elasticsearch-storage"
   template:
     metadata:
       name: "elasticsearch-master"
