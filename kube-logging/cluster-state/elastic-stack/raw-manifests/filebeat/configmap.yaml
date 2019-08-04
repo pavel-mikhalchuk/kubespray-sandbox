@@ -17,7 +17,7 @@ data:
     - type: container
       symlinks: true
       paths: 
-        - '/var/log/containers'
+        - '/var/log/containers/*.log'
       processors:
       - add_host_metadata: ~
       - add_kubernetes_metadata:
