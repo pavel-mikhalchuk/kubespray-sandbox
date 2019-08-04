@@ -17,4 +17,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: filebeat-filebeat
-  namespace: default
+  namespace: logging
