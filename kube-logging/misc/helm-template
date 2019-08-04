@@ -1,0 +1,15 @@
+#!/bin/bash
+
+repo=elastic
+app=kibana
+version=7.3.0
+workdir=../cluster-state/elastic-stack/raw-manifests/kibana
+
+cd $workdir
+rm -rf tmp
+mkdir tmp
+helm fetch --untar --untardir=./tmp $repo/$app --version $version
+helm template --name $app --namespace=default --output-dir . --values values.yaml ./tmp/$app
+mv kibana/templates/* ./
+rm -rf kibana
+rm -rf tmp

@@ -1,0 +1,4 @@
+ingress:
+  enabled: true
+  hosts:
+    - kibana.logging.in.alutech24.com

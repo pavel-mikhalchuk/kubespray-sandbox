@@ -136,24 +136,10 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.name
-          # - name: cluster.initial_master_nodes
-          #   value: "elasticsearch-master-0"
-          # - name: discovery.seed_hosts
-          #   value: "elasticsearch-master-headless"
-          # - name: cluster.name
-          #   value: "elasticsearch"
-          # - name: network.host
-          #   value: "0.0.0.0"
           - name: ES_JAVA_OPTS
             value: "-Xmx1g -Xms1g"
           - name: discovery.type
             value: "single-node"
-          # - name: node.data
-          #   value: "true"
-          # - name: node.ingest
-          #   value: "true"
-          # - name: node.master
-          #   value: "true"
           - name: bootstrap.memory_lock
             value: "true"
         volumeMounts:

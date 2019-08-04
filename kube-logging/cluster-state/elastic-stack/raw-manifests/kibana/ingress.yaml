@@ -1,0 +1,19 @@
+---
+# Source: kibana/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kibana-kibana
+  labels:
+    app: kibana
+    release: kibana
+    heritage: Tiller
+spec:
+  rules:
+    - host: kibana.logging.in.alutech24.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: kibana-kibana
+              servicePort: 5601
