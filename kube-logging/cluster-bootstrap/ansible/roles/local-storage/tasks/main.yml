@@ -12,3 +12,8 @@
   file:
     path: /var/kubernetes-local-storage/sentry/3
     state: directory
+
+- name: Create elasticsearch local storage folder
+  file:
+    path: /var/kubernetes-local-storage/elasticsearch
+    state: directory
