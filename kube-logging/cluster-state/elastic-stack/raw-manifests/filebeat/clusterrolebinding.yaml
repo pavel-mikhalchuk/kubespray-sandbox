@@ -1,0 +1,20 @@
+---
+# Source: filebeat/templates/clusterrolebinding.yaml
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: filebeat-filebeat-cluster-role-binding
+  labels:
+    app: "filebeat-filebeat"
+    chart: "filebeat-7.3.0"
+    heritage: "Tiller"
+    release: "filebeat"
+roleRef:
+  kind: ClusterRole
+  name: filebeat-filebeat-cluster-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: filebeat-filebeat
+  namespace: default

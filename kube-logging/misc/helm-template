@@ -1,15 +1,15 @@
 #!/bin/bash
 
 repo=elastic
-app=kibana
+app=filebeat
 version=7.3.0
-workdir=../cluster-state/elastic-stack/raw-manifests/kibana
+workdir=../cluster-state/elastic-stack/raw-manifests/filebeat
 
 cd $workdir
 rm -rf tmp
 mkdir tmp
 helm fetch --untar --untardir=./tmp $repo/$app --version $version
 helm template --name $app --namespace=default --output-dir . --values values.yaml ./tmp/$app
-mv kibana/templates/* ./
-rm -rf kibana
+mv $app/templates/* ./
+rm -rf $app
 rm -rf tmp
