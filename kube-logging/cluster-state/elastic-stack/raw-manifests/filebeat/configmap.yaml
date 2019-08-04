@@ -25,3 +25,6 @@ data:
           in_cluster: true
     output.elasticsearch:
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+    setup.template.settings:
+      index.number_of_shards: 1
+      index.codec: best_compression
