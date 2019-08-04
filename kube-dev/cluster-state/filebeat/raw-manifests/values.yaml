@@ -4,7 +4,7 @@ filebeatConfig:
     - type: container
       symlinks: true
       paths: 
-        - '/var/lib/docker/containers/*.log'
+        - '/var/lib/docker/containers/*/*.log'
       processors:
       - add_host_metadata: ~
       - add_kubernetes_metadata:
