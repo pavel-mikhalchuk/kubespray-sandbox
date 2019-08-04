@@ -14,7 +14,7 @@ metadata:
     {}
     
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     heritage: "Tiller"
     release: "elasticsearch"
@@ -24,9 +24,11 @@ spec:
   - name: http
     protocol: TCP
     port: 9200
+    nodePort: 31920
   - name: transport
     protocol: TCP
     port: 9300
+    nodePort: 31930
 ---
 kind: Service
 apiVersion: v1

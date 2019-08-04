@@ -1,0 +1,14 @@
+- name: Create Argocd Namespace
+  command: kubectl create namespace argocd
+  ignore_errors: true
+
+- name: Deploy Argo CD
+  command: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v1.1.2/manifests/install.yaml
+
+- name: Download cluster state from git repo
+  git:
+    repo: https://github.com/pavel-mikhalchuk/kubespray-sandbox.git
+    dest: /tmp/infra-git-repo
+
+- name: Register Argo CD App of Apps
+  command: kubectl apply -n argocd -f /tmp/infra-git-repo/kube-dev/cluster-state/app-of-apps/app.yml
