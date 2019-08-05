@@ -19,17 +19,8 @@
 - name: NFS Dynamic Provisioner
   import_tasks: nfs-server-provisioner.yml
 
-- name: Local Storage Setup
-  import_tasks: local-storage.yml
-
 - name: Jenkins
   import_tasks: jenkins.yml
-
-- name: ELK stack
-  import_tasks: elk-stack-logging.yml
-
-# - name: Prometheus, Alert Manager, Grafana
-  # import_tasks: prometheus-monitoring.yml
 
 - name: Argo CD
   import_tasks: argocd.yml

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+alias af="nohup kubectl port-forward svc/argocd-server -n argocd 8080:443 </dev/null >/dev/null 2>&1 &"
+alias as="argocd app sync"
+alias asa="argocd app sync app-of-apps"
+alias ag="argocd app get"
+alias ad="argocd app delete"
+alias al="argocd app list"
+
+alias ssh_log_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.33 'sudo su; bash -l'"
+
+alias ssh_master_20_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.20 'sudo su; bash -l'"
+alias ssh_worker_21_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.21 'sudo su; bash -l'"
+alias ssh_worker_22_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.22 'sudo su; bash -l'"
+alias ssh_worker_23_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.23 'sudo su; bash -l'"
+alias ssh_worker_24_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.24 'sudo su; bash -l'"
+alias ssh_worker_41_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.41 'sudo su; bash -l'"
+alias ssh_worker_42_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.42 'sudo su; bash -l'"
+
+alias ssh_master_101_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.101 'sudo su; bash -l'"
+alias ssh_worker_102_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.102 'sudo su; bash -l'"
+alias ssh_worker_103_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.103 'sudo su; bash -l'"
+alias ssh_worker_104_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.104 'sudo su; bash -l'"
+alias ssh_worker_105_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.105 'sudo su; bash -l'"
+alias ssh_nfs_106_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.106 'sudo su; bash -l'"
