@@ -37,5 +37,6 @@ mkdir ~/.ssh
 echo "Copying keys to nodes..."
 
 for ip in `cat /ssh-keys-deployer/target_hosts`; do
+    echo "Node - $ip"
     sshpass -p ${NODE_PASSWORD} ssh-copy-id -o StrictHostKeyChecking=no -i "/generated_ssh_key/${USER}_rsa.pub" ${USER}@$ip
 done
