@@ -33,7 +33,6 @@ echo "User: $USER"
 echo "Pswd: $NODE_PASSWORD"
 
 mkdir ~/.ssh
-mkdir /generated_ssh_key
 
 echo -e 'y\n' | ssh-keygen -b 2048 -t rsa -f "/generated_ssh_key/${USER}_rsa" -q -N ""
 echo "Keys are generated"

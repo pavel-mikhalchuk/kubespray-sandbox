@@ -20,7 +20,4 @@ else
 fi
 # SSH keys
 
-# Get permissions for kubespray folder so ansible .retry file can be written 
-chown -R ${USER}:${USER} /ssh-keys-deployer
-
 su ${USER} -c '"$0" "$@"' -- "$@" 

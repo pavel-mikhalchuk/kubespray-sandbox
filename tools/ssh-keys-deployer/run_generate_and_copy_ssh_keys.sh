@@ -29,7 +29,4 @@ if [[ -z "$NODE_PASSWORD" ]]; then
     exit 1
 fi
 
-mkdir -p $(pwd)/generated/ssh_keys
-chown -R ${USER}:${USER} $(pwd)/generated/ssh_keys
-
 docker run --rm --network=host -e "USER=${USER}" -v $(pwd)/generated/ssh_keys:/generated_ssh_key ssh-keys-deployer sh -c "scripts/generate-and-copy-ssh-keys.sh -u=${USER} -p=${NODE_PASSWORD}"
