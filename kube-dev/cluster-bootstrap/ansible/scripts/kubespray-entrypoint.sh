@@ -1,6 +1,7 @@
 #!/bin/bash
 
-useradd -m ${USER}
+groupadd --gid ${GROUP_ID} ${GROUP}
+useradd --create-home --uid ${USER_ID} --gid ${GROUP_ID} ${USER}
 
 echo "$USER ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
 

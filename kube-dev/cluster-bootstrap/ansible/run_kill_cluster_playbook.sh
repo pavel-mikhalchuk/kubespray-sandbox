@@ -19,6 +19,21 @@ if [[ -z "$USER" ]]; then
     USER=infra
 fi
 
-echo "User: $USER"
+GROUP=${USER}
 
-docker run --rm --network=host -e "USER=${USER}" -v $(pwd)/generated/ssh_keys:/host_ssh kubespray ansible-playbook --become --become-user=root -e reset_confirmation=yes --flush-cache kubespray/reset.yml
+USER_ID=$(id -u ${USER}) || { echo "You should have user ${USER} created on your machine" ; exit 1; }
+GROUP_ID=$(id -g ${GROUP}) || { echo "You should have group ${GROUP} created on your machine" ; exit 1; }
+
+echo "User: ${USER}"
+echo "User ID: ${USER_ID}"
+echo "Group: ${GROUP}"
+echo "Group ID: ${GROUP_ID}"
+
+docker run --rm --network=host \
+  -e "USER=${USER}" \
+  -e "USER_ID=${USER_ID}" \
+  -e "GROUP=${GROUP}" \
+  -e "GROUP_ID=${GROUP_ID}" \
+  -v $(pwd)/generated/ssh_keys:/host_ssh \
+  kubespray \
+  ansible-playbook --become --become-user=root -e reset_confirmation=yes --flush-cache kubespray/reset.yml

@@ -29,7 +29,11 @@ if [[ -z "$NODE_PASSWORD" ]]; then
     exit 1
 fi
 
-echo "User: $USER"
+echo "User: ${USER}"
+echo "User ID: ${USER_ID}"
+echo "Group: ${GROUP}"
+echo "Group ID: ${GROUP_ID}"
+
 echo "Pswd: $NODE_PASSWORD"
 
 mkdir ~/.ssh

@@ -46,9 +46,25 @@ if [[ -z "$DOCKER_REGISTRY_PASSWORD" ]]; then
     exit 1
 fi
 
-echo "User: $USER"
+GROUP=${USER}
+
+USER_ID=$(id -u ${USER}) || { echo "You should have user ${USER} created on your machine" ; exit 1; }
+GROUP_ID=$(id -g ${GROUP}) || { echo "You should have group ${GROUP} created on your machine" ; exit 1; }
+
+echo "User: ${USER}"
+echo "User ID: ${USER_ID}"
+echo "Group: ${GROUP}"
+echo "Group ID: ${GROUP_ID}"
 echo "NS: $NAMESPACE"
 echo "Docker registry user: $DOCKER_REGISTRY_USER"
 echo "Docker registry password: $DOCKER_REGISTRY_PASSWORD"
 
-docker run --rm --network=host -e "USER=${USER}" -v $(pwd)/generated/ssh_keys:/host_ssh kubespray ansible-playbook --become --become-user=root kube-ns.yml --extra-vars "ns=${NAMESPACE} docker_registry_username=${DOCKER_REGISTRY_USER} docker_registry_pwd=${DOCKER_REGISTRY_PASSWORD}"
+docker run --rm --network=host \
+  -e "USER=${USER}" \
+  -e "USER_ID=${USER_ID}" \
+  -e "GROUP=${GROUP}" \
+  -e "GROUP_ID=${GROUP_ID}" \
+  -v $(pwd)/generated/ssh_keys:/host_ssh \
+  kubespray \
+  ansible-playbook --become --become-user=root kube-ns.yml \
+  --extra-vars "ns=${NAMESPACE} docker_registry_username=${DOCKER_REGISTRY_USER} docker_registry_pwd=${DOCKER_REGISTRY_PASSWORD}"
