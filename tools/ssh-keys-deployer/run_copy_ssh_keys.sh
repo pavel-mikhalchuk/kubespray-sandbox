@@ -30,11 +30,11 @@ if [[ -z "$NODE_PASSWORD" ]]; then
     exit 1
 fi
 
-USER_ID=$(id -u ${USER}) || { echo "You should have user ${USER} created on your machine"; exit 1 }
-GROUP_ID=$(id -g ${GROUP}) || { echo "You should have group ${GROUP} created on your machine"; exit 1 }
+USER_ID=$(id -u ${USER}) || { echo "You should have user ${USER} created on your machine" ; exit 1; }
+GROUP_ID=$(id -g ${GROUP}) || { echo "You should have group ${GROUP} created on your machine" ; exit 1; }
 
-docker run --rm --network=host \ 
-  -e "USER=${USER}" \ 
+docker run --rm  --network=host -it \
+  -e "USER=${USER}" \
   -e "USER_ID=${USER_ID}" \
   -e "GROUP=${GROUP}" \
   -e "GROUP_ID=${GROUP_ID}" \
