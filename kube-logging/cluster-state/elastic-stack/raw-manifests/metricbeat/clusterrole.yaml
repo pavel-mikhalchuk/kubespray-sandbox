@@ -19,6 +19,7 @@ rules:
   - deployments
   - replicasets
   - pods
+  - events
   verbs:
   - get
   - list

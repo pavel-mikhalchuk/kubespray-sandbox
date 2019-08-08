@@ -45,6 +45,8 @@ data:
       processors:
       - add_kubernetes_metadata:
           in_cluster: true
+          labels.dedot: true
+          annotations.dedot: true
     - module: kubernetes
       enabled: true
       labels.dedot: true
