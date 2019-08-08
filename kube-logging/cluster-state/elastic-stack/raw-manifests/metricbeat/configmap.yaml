@@ -17,6 +17,7 @@ data:
     # State metrics from kube-state-metrics service:
     - module: kubernetes
       enabled: true
+      labels.dedot: true
       metricsets:
         - state_node
         - state_deployment
