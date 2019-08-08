@@ -11,16 +11,16 @@ metadata:
     heritage: "Tiller"
     release: "metricbeat"
 rules:
-- apiGroups:
-  - ""
+- apiGroups: [""]
   resources:
   - nodes
   - namespaces
-  - deployments
-  - replicasets
   - pods
   - events
-  verbs:
-  - get
-  - list
-  - watch
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["extensions", "apps"]
+  resources:
+  - deployments
+  - replicasets
+  - statefulsets
+  verbs: ["get", "list", "watch"]
