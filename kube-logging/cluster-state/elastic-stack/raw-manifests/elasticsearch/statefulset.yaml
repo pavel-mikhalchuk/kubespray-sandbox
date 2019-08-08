@@ -125,8 +125,8 @@ spec:
           containerPort: 9300
         resources:
           limits:
-            cpu: 1000m
-            memory: 2Gi
+            cpu: 2000m
+            memory: 4Gi
           requests:
             cpu: 100m
             memory: 2Gi
@@ -137,7 +137,7 @@ spec:
               fieldRef:
                 fieldPath: metadata.name
           - name: ES_JAVA_OPTS
-            value: "-Xmx1g -Xms1g"
+            value: "-Xmx3g -Xms1g"
           - name: discovery.type
             value: "single-node"
           - name: bootstrap.memory_lock
