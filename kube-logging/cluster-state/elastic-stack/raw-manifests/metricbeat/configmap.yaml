@@ -51,11 +51,17 @@ data:
         - system
         - volume
       period: 10s
-      host: ${NODE_NAME}
       hosts: ["localhost:10255"]
       enabled: true
-      add_metadata: true
-      in_cluster: true
+      processors:
+      - add_kubernetes_metadata:
+          host: ${NODE_NAME}
+          in_cluster: true
+      - drop_fields:
+          when:
+            has_fields: ['kubernetes.labels.app']
+          fields:
+            - 'kubernetes.labels.app'
     
     # Kubernetes events
     - module: kubernetes
