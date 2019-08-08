@@ -16,6 +16,7 @@ data:
     metricbeat.modules:
     - module: kubernetes
       enabled: true
+      labels.dedot: true
       metricsets:
         - state_node
         - state_deployment
@@ -32,6 +33,7 @@ data:
       hostfs: /hostfs
     metricbeat.modules:
     - module: kubernetes
+      labels.dedot: true
       metricsets:
         - container
         - node
@@ -45,6 +47,7 @@ data:
           in_cluster: true
     - module: kubernetes
       enabled: true
+      labels.dedot: true
       metricsets:
         - event
     - module: system

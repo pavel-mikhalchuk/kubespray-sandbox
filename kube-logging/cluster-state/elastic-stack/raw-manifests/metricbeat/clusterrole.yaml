@@ -14,7 +14,10 @@ rules:
 - apiGroups:
   - ""
   resources:
+  - nodes
   - namespaces
+  - deployments
+  - replicasets
   - pods
   verbs:
   - get
