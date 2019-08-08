@@ -29,15 +29,13 @@ data:
       processors:
       - add_kubernetes_metadata:
           in_cluster: true
-          labels.dedot: true
-          annotations.dedot: true
-    output.file:
-      path: "/usr/share/metricbeat/data"
-      filename: metricbeat
-      rotate_every_kb: 10000
-      number_of_files: 5    
-    # output.elasticsearch:
-    #   hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+      - drop_fields:
+          when:
+            has_fields: ['kubernetes.labels.app']
+          fields:
+            - 'kubernetes.labels.app'
+    output.elasticsearch:
+      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
     
   metricbeat.yml: |
     system:
