@@ -50,7 +50,7 @@ data:
         - system
         - volume
       period: 10s
-      hosts: ["localhost:10255"]
+      hosts: ["${NODE_IP}:10255"]
       enabled: true
       add_metadata: true
       in_cluster: true
