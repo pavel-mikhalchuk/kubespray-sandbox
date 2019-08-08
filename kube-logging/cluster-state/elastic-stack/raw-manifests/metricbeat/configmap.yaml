@@ -28,6 +28,7 @@ data:
       hosts: ["${KUBE_STATE_METRICS_HOSTS:kube-state-metrics:8080}"]
       processors:
       - add_kubernetes_metadata:
+          host: ${NODE_NAME}
           in_cluster: true
       - drop_fields:
           when:
@@ -50,6 +51,7 @@ data:
         - system
         - volume
       period: 10s
+      host: ${NODE_NAME}
       hosts: ["localhost:10250"]
       enabled: true
       add_metadata: true
@@ -69,6 +71,7 @@ data:
       enabled: true
       metricsets:
         - apiserver
+      host: ${NODE_NAME}
       hosts: ["https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}"]
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       ssl.certificate_authorities:
@@ -79,6 +82,7 @@ data:
       enabled: true
       metricsets:
         - proxy
+      host: ${NODE_NAME}
       hosts: ["localhost:10249"]
       period: 10s
 
@@ -87,6 +91,7 @@ data:
       enabled: true
       metricsets:
         - controllermanager
+      host: ${NODE_NAME}
       hosts: ["http://localhost:10252"]
       period: 10s
 
@@ -95,6 +100,7 @@ data:
       enabled: true
       metricsets:
         - scheduler
+      host: ${NODE_NAME}
       hosts: ["localhost:10251"]
       period: 10s
 
