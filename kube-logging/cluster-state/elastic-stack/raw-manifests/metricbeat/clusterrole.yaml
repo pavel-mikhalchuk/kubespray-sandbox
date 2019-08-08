@@ -12,11 +12,7 @@ metadata:
     release: "metricbeat"
 rules:
 - apiGroups: [""]
-  resources:
-  - nodes
-  - namespaces
-  - pods
-  - events
+  resources: ["nodes", "namespaces", "services", "endpoints", "pods", "events"]
   verbs: ["get", "list", "watch"]
 - apiGroups: ["extensions", "apps"]
   resources:
@@ -24,5 +20,8 @@ rules:
   - replicasets
   - statefulsets
   verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["nodes/metrics", "nodes/stats"]
+  verbs: ["get"]
 - nonResourceURLs: ["/metrics"]
   verbs: ["get"]
