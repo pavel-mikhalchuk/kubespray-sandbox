@@ -39,7 +39,6 @@ data:
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
     
   metricbeat.yml: |
-    logging.level: debug
     system:
       hostfs: /hostfs
     metricbeat.modules:
