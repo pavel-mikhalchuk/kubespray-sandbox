@@ -27,8 +27,10 @@ data:
         - state_container
       period: 10s
       hosts: ["${KUBE_STATE_METRICS_HOSTS:kube-state-metrics:8080}"]
-      add_metadata: true
-      in_cluster: true
+      processors:
+      - add_kubernetes_metadata:
+          in_cluster: true
+          labels.dedot: true
     output.elasticsearch:
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
     
