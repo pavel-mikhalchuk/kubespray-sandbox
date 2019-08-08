@@ -81,7 +81,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: KUBE_STATE_METRICS_HOSTS
-          value: "$(METRICBEAT_KUBE_STATE_METRICS_SERVICE_HOST):$(METRICBEAT_KUBE_STATE_METRICS_SERVICE_PORT_HTTP)"
+          value: "$(KUBE_STATE_METRICS_SERVICE_HOST):$(KUBE_STATE_METRICS_SERVICE_PORT_HTTP)"
         securityContext:
           privileged: false
           runAsUser: 0
