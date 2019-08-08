@@ -1,0 +1,22 @@
+---
+# Source: metricbeat/templates/clusterrole.yaml
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: metricbeat-metricbeat-cluster-role
+  labels:
+    app: "metricbeat-metricbeat"
+    chart: "metricbeat-7.3.0"
+    heritage: "Tiller"
+    release: "metricbeat"
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  - pods
+  verbs:
+  - get
+  - list
+  - watch

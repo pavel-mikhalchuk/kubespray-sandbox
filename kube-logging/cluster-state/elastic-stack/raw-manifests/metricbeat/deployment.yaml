@@ -1,0 +1,97 @@
+---
+# Source: metricbeat/templates/deployment.yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 'metricbeat-metricbeat-metrics'
+  labels:
+    app: 'metricbeat-metricbeat-metrics'
+    chart: 'metricbeat-7.3.0'
+    heritage: 'Tiller'
+    release: 'metricbeat'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 'metricbeat-metricbeat-metrics'
+      chart: 'metricbeat-7.3.0'
+      heritage: 'Tiller'
+      release: 'metricbeat'
+  template:
+    metadata:
+      annotations:
+        
+        configChecksum: 85527e805efa1e96c9bc6516dcd39d3705e552817f5f57f32f2651a651eeb10
+      labels:
+        app: 'metricbeat-metricbeat-metrics'
+        chart: 'metricbeat-7.3.0'
+        heritage: 'Tiller'
+        release: 'metricbeat'
+    spec:
+      serviceAccountName: metricbeat-metricbeat
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: metricbeat-config
+        configMap:
+          defaultMode: 0600
+          name: metricbeat-metricbeat-config
+      containers:
+      - name: "metricbeat"
+        image: "docker.elastic.co/beats/metricbeat:7.3.0"
+        imagePullPolicy: "IfNotPresent"
+        args:
+          - "-c"
+          - "/usr/share/metricbeat/kube-state-metrics-metricbeat.yml"
+          - "-e"
+          - "-E"
+          - "http.enabled=true"
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - |
+              #!/usr/bin/env bash -e
+              curl --fail 127.0.0.1:5066
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - |
+              #!/usr/bin/env bash -e
+              metricbeat test output
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: KUBE_STATE_METRICS_HOSTS
+          value: "$(METRICBEAT_KUBE_STATE_METRICS_SERVICE_HOST):$(METRICBEAT_KUBE_STATE_METRICS_SERVICE_PORT_HTTP)"
+        securityContext:
+          privileged: false
+          runAsUser: 0
+          
+        volumeMounts:
+        - name: metricbeat-config
+          mountPath: /usr/share/metricbeat/kube-state-metrics-metricbeat.yml
+          readOnly: true
+          subPath: kube-state-metrics-metricbeat.yml
+        - name: metricbeat-config
+          mountPath: /usr/share/metricbeat/metricbeat.yml
+          readOnly: true
+          subPath: metricbeat.yml

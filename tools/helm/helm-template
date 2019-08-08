@@ -1,9 +1,9 @@
 #!/bin/bash
 
-repo=elastic
-app=filebeat
-version=7.3.0
-workdir=../cluster-state/elastic-stack/raw-manifests/filebeat
+repo=stable
+app=kube-state-metrics
+version=2.2.2
+workdir=../../kube-logging/cluster-state/kube-state-metrics/raw-manifests
 
 cd $workdir
 rm -rf tmp
