@@ -52,13 +52,10 @@ data:
         - volume
       period: 10s
       host: ${NODE_NAME}
-      hosts: ["localhost:10250"]
+      hosts: ["localhost:10255"]
       enabled: true
       add_metadata: true
       in_cluster: true
-      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-      ssl.certificate_authorities:
-        - /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
     
     # Kubernetes events
     - module: kubernetes
