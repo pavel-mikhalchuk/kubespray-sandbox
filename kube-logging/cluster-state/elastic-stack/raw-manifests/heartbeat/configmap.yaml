@@ -14,11 +14,6 @@ data:
 
     heartbeat.monitors:
     - type: http
-      name: Failure Test
-      schedule: '@every 5s'
-      urls: ["http://localhost:12345/service/status"]
-      check.response.status: 200
-    - type: http
       name: AService Prod
       schedule: '@every 5s'
       urls: ["https://aservice.alutech24.com/webPortal/"]
