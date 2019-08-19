@@ -22,12 +22,12 @@ data:
       name: Dealer Prod
       schedule: '@every 5s'
       urls: ["https://dealer.alutech24.com/"]
-      check.response.status: 302
+      check.response.status: 200
     - type: http
       name: Manager Prod
       schedule: '@every 5s'
       urls: ["https://manager.alutech24.com/"]
-      check.response.status: 302
+      check.response.status: 200
     - type: http
       name: Auth Prod
       schedule: '@every 5s'
