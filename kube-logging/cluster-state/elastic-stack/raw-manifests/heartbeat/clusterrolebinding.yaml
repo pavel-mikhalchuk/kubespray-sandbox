@@ -1,0 +1,19 @@
+---
+# Source: heartbeat/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: heartbeat
+  labels:
+    app: heartbeat
+    chart: heartbeat-1.2.0
+    release: heartbeat
+    heritage: Tiller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: heartbeat
+subjects:
+- kind: ServiceAccount
+  name: heartbeat
+  namespace: default

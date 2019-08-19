@@ -1,0 +1,17 @@
+---
+# Source: heartbeat/templates/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: heartbeat
+  labels:
+    app: heartbeat
+    chart: heartbeat-1.2.0
+    release: heartbeat
+    heritage: Tiller
+rules:
+- apiGroups: [""]
+  resources:
+  - namespaces
+  - pods
+  verbs: ["get", "list", "watch"]

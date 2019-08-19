@@ -1,9 +1,9 @@
 #!/bin/bash
 
 repo=stable
-app=kube-state-metrics
-version=2.2.2
-workdir=../../kube-logging/cluster-state/kube-state-metrics/raw-manifests
+app=heartbeat
+version=1.2.0
+workdir=../../kube-logging/cluster-state/elastic-stack/raw-manifests/heartbeat
 
 cd $workdir
 rm -rf tmp

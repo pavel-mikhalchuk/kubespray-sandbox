@@ -1,0 +1,84 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heartbeat
+  labels:
+    app: heartbeat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 'heartbeat'
+  template:
+    metadata:
+      labels:
+        app: 'heartbeat'
+    spec:
+      serviceAccountName: heartbeat
+      terminationGracePeriodSeconds: 60
+      volumes:
+      - name: heartbeat-config
+        configMap:
+          defaultMode: 0600
+          name: heartbeat-config
+      - name: data
+        hostPath:
+          path: /var/lib/heartbeat
+          type: DirectoryOrCreate
+      containers:
+      - name: heartbeat
+        image: "docker.elastic.co/beats/heartbeat:7.3.0"
+        imagePullPolicy: IfNotPresent
+        args:
+        - "-e"
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: NODE_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #     - sh
+        #     - -c
+        #     - |
+        #       #!/usr/bin/env bash -e
+        #       curl --fail 127.0.0.1:5066
+        # readinessProbe:
+        #   exec:
+        #     command:
+        #     - sh
+        #     - -c
+        #     - |
+        #       #!/usr/bin/env bash -e
+        #       metricbeat test output
+        #   failureThreshold: 3
+        #   initialDelaySeconds: 10
+        #   periodSeconds: 10
+        #   timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        securityContext:
+          privileged: false
+          runAsUser: 0
+        volumeMounts:
+        - name: heartbeat-config
+          mountPath: /usr/share/heartbeat/heartbeat.yml
+          readOnly: true
+          subPath: heartbeat.yml
+        - name: data
+          mountPath: /usr/share/heartbeat/data

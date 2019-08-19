@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: heartbeat-config
+  labels:
+    app: "heartbeat"
+data:
+  heartbeat.yml: |
+    
+    heartbeat.config.monitors:
+      path: /path/to/my/monitors.d/*.yml
+      reload.enabled: true
+
+    heartbeat.monitors:
+    - type: http
+      name: Failure Test
+      schedule: '@every 5s'
+      urls: ["http://localhost:12345/service/status"]
+      check.response.status: 200
+    - type: http
+      name: AService Prod
+      schedule: '@every 5s'
+      urls: ["https://aservice.alutech24.com/webPortal/"]
+      check.response.status: 200
+
+    output.elasticsearch:
+      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+    
+    setup.kibana:
+      host: '${KIBANA_HOST:kibana-kibana:5601}'
