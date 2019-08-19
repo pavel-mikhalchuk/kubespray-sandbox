@@ -23,6 +23,21 @@ data:
       schedule: '@every 5s'
       urls: ["https://aservice.alutech24.com/webPortal/"]
       check.response.status: 200
+    - type: http
+      name: Dealer Prod
+      schedule: '@every 5s'
+      urls: ["https://dealer.alutech24.com/"]
+      check.response.status: 302
+    - type: http
+      name: Manager Prod
+      schedule: '@every 5s'
+      urls: ["https://manager.alutech24.com/"]
+      check.response.status: 302
+    - type: http
+      name: Auth Prod
+      schedule: '@every 5s'
+      urls: ["https://auth.alutech24.com/cas/login/"]
+      check.response.status: 302
 
     output.elasticsearch:
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
