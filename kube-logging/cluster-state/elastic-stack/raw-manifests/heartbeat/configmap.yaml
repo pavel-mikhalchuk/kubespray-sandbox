@@ -37,7 +37,7 @@ data:
       name: Auth Prod
       schedule: '@every 5s'
       urls: ["https://auth.alutech24.com/cas/login/"]
-      check.response.status: 302
+      check.response.status: 200
 
     output.elasticsearch:
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
