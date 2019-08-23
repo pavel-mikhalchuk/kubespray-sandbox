@@ -23,6 +23,10 @@ data:
       schedule: '@every 5s'
       urls: ["https://dealer.alutech24.com/"]
       check.response.status: 200
+      name: Dealer Static Prod
+      schedule: '@every 5s'
+      urls: ["https://dealer.alutech24.com/static/images/logos/alutech_logo.svg"]
+      check.response.status: 200
     - type: http
       name: Manager Prod
       schedule: '@every 5s'
@@ -32,6 +36,11 @@ data:
       name: Auth Prod
       schedule: '@every 5s'
       urls: ["https://auth.alutech24.com/cas/login/"]
+      check.response.status: 200
+    - type: http
+      name: Auth Static Prod
+      schedule: '@every 5s'
+      urls: ["https://auth.alutech24.com/static/images/logos/alutech_logo.svg"]
       check.response.status: 200
 
     output.elasticsearch:
