@@ -4,7 +4,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: jenkins
-  namespace: default
+  namespace: jenkins
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-1.5.9"
