@@ -19,8 +19,5 @@
 - name: NFS Dynamic Provisioner
   import_tasks: nfs-server-provisioner.yml
 
-- name: Jenkins
-  import_tasks: jenkins.yml
-
 - name: Argo CD
   import_tasks: argocd.yml

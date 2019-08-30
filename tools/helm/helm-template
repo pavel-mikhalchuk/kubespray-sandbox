@@ -1,9 +1,9 @@
 #!/bin/bash
 
 repo=stable
-app=heartbeat
-version=1.2.0
-workdir=../../kube-logging/cluster-state/elastic-stack/raw-manifests/heartbeat
+app=jenkins
+version=1.5.9
+workdir=../../kube-dev/cluster-state/jenkins/raw-templates
 
 cd $workdir
 rm -rf tmp
