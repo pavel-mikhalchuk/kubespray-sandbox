@@ -11,7 +11,7 @@
     dest: /tmp/infra-git-repo
 
 - name: Register Argo CD App of Apps
-  command: kubectl apply -n argocd -f /tmp/infra-git-repo/kube-logging/cluster-state/app-of-apps/app.yml
+  command: kubectl apply -n argocd -f /tmp/infra-git-repo/kube-qa-portal/cluster-state/app-of-apps/app.yml
 
 - name: Install Argo CD CLI
   get_url:
