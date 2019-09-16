@@ -1,0 +1,63 @@
+- name: Create Argocd Namespace
+  command: kubectl create namespace argocd
+  ignore_errors: true
+
+- name: Deploy Argo CD
+  command: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v1.1.2/manifests/install.yaml
+
+- name: Download cluster state from git repo
+  git:
+    repo: https://github.com/pavel-mikhalchuk/kubespray-sandbox.git
+    dest: /tmp/infra-git-repo
+
+- name: Register Argo CD App of Apps
+  command: kubectl apply -n argocd -f /tmp/infra-git-repo/kube-logging/cluster-state/app-of-apps/app.yml
+
+- name: Install Argo CD CLI
+  get_url:
+    url: https://github.com/argoproj/argo-cd/releases/download/v1.1.2/argocd-linux-amd64
+    dest: /usr/bin/argocd
+    mode: '0755'
+
+# - name: Get password for Argo CD login
+#   shell: kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
+#   register: argocd_password
+
+# - name: Declare Argo CD tunnel PID file
+#   set_fact:
+#     argocd_tunnel_pid_file: /tmp/argocd_tunnel_pid
+
+# - name: Register Argo CD App of Apps
+#   block:
+#     - name: Set up a tunnel to Argo CD
+#       shell: |
+#         nohup kubectl port-forward svc/argocd-server -n argocd 8080:443 </dev/null >/dev/null 2>&1 &
+#         echo "$!" >{{ argocd_tunnel_pid_file|quote }}
+#       args:
+#         creates: "{{ argocd_tunnel_pid_file }}"
+#       changed_when: false
+
+#     - name: Wait for tunnel to establish
+#       pause:
+#         seconds: 5
+
+#     - name: Login to Argo CD
+#       command: "argocd login localhost:8080 --username=admin --password={{ argocd_password.stdout }} --insecure"
+
+#     - name: Register App of Apps
+#       command: > 
+#         argocd app create app-of-apps
+#           --repo https://github.com/argoproj/argocd-example-apps.git
+#           --path guestbook
+#           --dest-server https://kubernetes.default.svc
+#           --dest-namespace default
+#           --sync-policy automated
+
+#   always:
+#     - name: Tear down the tunnel to Argo CD
+#       shell: |
+#         kill "$(cat {{ argocd_tunnel_pid_file|quote }})" || true
+#         rm -f {{ argocd_tunnel_pid_file|quote }}
+#       args:
+#         removes: "{{ argocd_tunnel_pid_file }}"
+#       changed_when: false

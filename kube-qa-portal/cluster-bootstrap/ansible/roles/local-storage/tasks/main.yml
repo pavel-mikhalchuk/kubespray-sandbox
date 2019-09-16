@@ -1,0 +1,9 @@
+- name: Create "report portal" local storage "mongodb" folder 
+  file:
+    path: /var/kubernetes-local-storage/reportportal/mongodb
+    state: directory
+
+- name: Create "report portal" local storage "registry" folder 
+  file:
+    path: /var/kubernetes-local-storage/reportportal/registry
+    state: directory
