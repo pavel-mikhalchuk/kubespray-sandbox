@@ -9,10 +9,15 @@ alias al="argocd app list"
 
 alias ssh_log_node="ssh -i ~/.ssh/atek/mikhalchuk_rsa mikhalchuk@10.100.20.33"
 alias ssh_log_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.33 'sudo su; bash -l'"
+
 alias ssh_store_node="ssh -i ~/.ssh/atek/mikhalchuk_rsa mikhalchuk@10.100.20.31"
 alias ssh_store_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.31 'sudo su; bash -l'"
+
 alias ssh_dockerhub_node="ssh -i ~/.ssh/atek/mikhalchuk_rsa mikhalchuk@10.100.20.32"
 alias ssh_dockerhub_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.32 'sudo su; bash -l'"
+
+alias ssh_qa_portal_node="ssh -i ~/.ssh/atek/mikhalchuk_rsa mikhalchuk@10.100.20.102"
+alias ssh_qa_portal_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.102 'sudo su; bash -l'"
 
 alias ssh_master_20_node="ssh -i ~/.ssh/atek/mikhalchuk_rsa mikhalchuk@10.100.20.20"
 alias ssh_master_20_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.20 'sudo su; bash -l'"
@@ -31,8 +36,6 @@ alias ssh_worker_42_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@1
 
 alias ssh_master_101_node="ssh -i ~/.ssh/atek/mikhalchuk_rsa mikhalchuk@10.100.20.101"
 alias ssh_master_101_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.101 'sudo su; bash -l'"
-alias ssh_worker_102_node="ssh -i ~/.ssh/atek/mikhalchuk_rsa mikhalchuk@10.100.20.102"
-alias ssh_worker_102_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.102 'sudo su; bash -l'"
 alias ssh_worker_103_node="ssh -i ~/.ssh/atek/mikhalchuk_rsa mikhalchuk@10.100.20.103"
 alias ssh_worker_103_node_root="ssh -i ~/.ssh/atek/mikhalchuk_rsa -t mikhalchuk@10.100.20.103 'sudo su; bash -l'"
 alias ssh_worker_104_node="ssh -i ~/.ssh/atek/mikhalchuk_rsa mikhalchuk@10.100.20.104"
