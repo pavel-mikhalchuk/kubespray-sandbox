@@ -34,8 +34,6 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
-      nodeSelector:
-        runtime: log
 ---
 # Source: reportportal/templates/index-service.yaml
 apiVersion: v1

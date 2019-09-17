@@ -36,8 +36,6 @@ spec:
         ports:
         - containerPort: 8080
           protocol: TCP
-      nodeSelector:
-        runtime: log
 ---
 # Source: reportportal/templates/ui-service.yaml
 apiVersion: v1

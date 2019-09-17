@@ -47,8 +47,6 @@ spec:
         hostPath:
           path: /reportportal/registry
           type: DirectoryOrCreate
-      nodeSelector:
-        runtime: log
 ---
 # Source: reportportal/templates/registry-service.yaml
 apiVersion: v1

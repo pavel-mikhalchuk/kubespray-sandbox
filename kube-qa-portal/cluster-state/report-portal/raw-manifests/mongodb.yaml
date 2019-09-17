@@ -34,8 +34,6 @@ spec:
         hostPath:
           path: /reportportal/mongodb
           type: DirectoryOrCreate
-      nodeSelector:
-        runtime: log
 ---
 # Source: reportportal/templates/mongodb-service.yaml
 apiVersion: v1

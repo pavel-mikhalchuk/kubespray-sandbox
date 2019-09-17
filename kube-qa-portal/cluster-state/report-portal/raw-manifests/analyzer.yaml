@@ -29,8 +29,6 @@ spec:
           limits:
             cpu: 100m
             memory: 128Mi
-      nodeSelector:
-        runtime: log
 ---
 # Source: reportportal/templates/analyzer-service.yaml
 apiVersion: v1
