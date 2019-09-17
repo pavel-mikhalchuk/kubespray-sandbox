@@ -71,7 +71,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx-dev"
 spec:
   rules:
-  - host: [reportportal.qa.in.alutech24.com]
+  - host: reportportal.qa.in.alutech24.com
     http:
       paths:
       - backend:
