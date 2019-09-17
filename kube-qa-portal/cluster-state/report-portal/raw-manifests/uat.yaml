@@ -1,0 +1,58 @@
+# Source: reportportal/templates/uat-statefulset.yaml
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: uat
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: reportportal-uat
+  serviceName: uat-0
+  template:
+    metadata:
+      labels:
+        component: reportportal-uat
+    spec:
+      containers:
+      - env:
+        - name: RP_PROFILES
+          value: docker
+        - name: RP_SESSION_LIVE
+          value: "86400"
+        image: "reportportal/service-authorization:4.1.0"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 512Mi
+        name: uat
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+      nodeSelector:
+        runtime: log
+---
+# Source: reportportal/templates/uat-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: uat-0
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  ports:
+  - name: headless
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    component: reportportal-uat
+  type: ClusterIP
+---

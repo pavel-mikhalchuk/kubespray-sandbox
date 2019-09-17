@@ -1,0 +1,58 @@
+# Source: reportportal/templates/api-statefulset.yaml
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: api
+  namespace: scramble
+  labels:     
+    app: "cautious-bison"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: reportportal-api
+  serviceName: api-0
+  template:
+    metadata:
+      labels:
+        component: reportportal-api
+    spec:
+      containers:
+      - env:
+        - name: "JAVA_OPTS"
+          value: "-Xmx1g -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp"
+        - name: "RP_PROFILES"
+          value: "docker"
+        image: "reportportal/service-api:4.1.0"
+        name: api
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 200m
+            memory: 1000Mi
+          limits:
+            cpu: 300m
+            memory: 1500Mi
+      nodeSelector:
+        runtime: log
+---
+# Source: reportportal/templates/api-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-0
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  ports:
+  - name: headless
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    component: reportportal-api
+  type: ClusterIP
+---

@@ -1,0 +1,53 @@
+# Source: reportportal/templates/analyzer-statefulset.yaml
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: analyzer
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: reportportal-analyzer
+  serviceName: analyzer-0
+  template:
+    metadata:
+      labels:
+        component: reportportal-analyzer
+    spec:
+      containers:
+      - image: "reportportal/service-analyzer:4.1.0"
+        name: analyzer
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+      nodeSelector:
+        runtime: log
+---
+# Source: reportportal/templates/analyzer-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: analyzer-0
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  ports:
+  - name: headless
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    component: reportportal-analyzer
+  type: ClusterIP
+---

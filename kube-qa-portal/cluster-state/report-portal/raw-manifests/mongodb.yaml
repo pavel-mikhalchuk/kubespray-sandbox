@@ -1,0 +1,56 @@
+# Source: reportportal/templates/mongodb-statefulset.yaml
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: mongodb
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        component: reportportal-mongodb
+  serviceName: mongodb-0
+  template:
+    metadata:
+      labels:
+        component: reportportal-mongodb
+    spec:
+      containers:
+      - image: "mongo:3.4"
+        name: mongodb
+        volumeMounts:
+        - mountPath: /data/db
+          name: reportportal-mongodb
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
+          limits:
+            cpu: 256m
+            memory: 576Mi
+      volumes:
+      - name: reportportal-mongodb
+        hostPath:
+          path: /reportportal/mongodb
+          type: DirectoryOrCreate
+      nodeSelector:
+        runtime: log
+---
+# Source: reportportal/templates/mongodb-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+  selector:
+    component: reportportal-mongodb
+  type: ClusterIP
+---

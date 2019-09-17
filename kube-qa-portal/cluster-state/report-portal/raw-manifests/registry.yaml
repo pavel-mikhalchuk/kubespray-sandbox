@@ -1,0 +1,71 @@
+# Source: reportportal/templates/registry-statefulset.yaml
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: registry
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: reportportal-registry
+  serviceName: registry
+  template:
+    metadata:
+      labels:
+        component: reportportal-registry
+    spec:
+      containers:
+      - args:
+        - agent
+        - -server
+        - -bootstrap-expect=1
+        - -ui
+        - -client
+        - 0.0.0.0
+        env:
+        - name: CONSUL_LOCAL_CONFIG
+          value: '{"leave_on_terminate": true}'
+        image: "consul:1.0.6"
+        name: registry
+        ports:
+        - containerPort: 8500
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+        volumeMounts:
+        - mountPath: /consul/data
+          name: reportportal-registry
+      volumes:
+      - name: reportportal-registry
+        hostPath:
+          path: /reportportal/registry
+          type: DirectoryOrCreate
+      nodeSelector:
+        runtime: log
+---
+# Source: reportportal/templates/registry-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  ports:
+  - name: "8500"
+    port: 8500
+    protocol: TCP
+    targetPort: 8500
+  selector:
+    component: reportportal-registry
+  type: ClusterIP
+---

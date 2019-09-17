@@ -1,0 +1,60 @@
+# Source: reportportal/templates/ui-statefulset.yaml
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: ui
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: reportportal-ui
+  serviceName: ui
+  template:
+    metadata:
+      labels:
+        component: reportportal-ui
+    spec:
+      containers:
+      - env:
+        - name: RP_CONSUL.ADDRESS
+          value: registry:8500
+        - name: RP_CONSUL.TAGS
+          value: urlprefix-/ui opts strip=/ui
+        - name: RP_SERVER.PORT
+          value: "8080"
+        image: "reportportal/service-ui:4.1.0"
+        name: ui
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+      nodeSelector:
+        runtime: log
+---
+# Source: reportportal/templates/ui-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui-0
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  ports:
+  - name: headless
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    component: reportportal-ui
+  type: ClusterIP
+---

@@ -1,0 +1,84 @@
+# Source: reportportal/templates/gateway-statefulset.yaml
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: gateway
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: reportportal-gateway
+  serviceName: gateway
+  template:
+    metadata:
+      labels:
+        component: reportportal-gateway
+    spec:
+      containers:
+      - env:
+        - name: FABIO_PROXY_ADDR
+          value: :9999;rt=300s;wt=300s
+        - name: FABIO_REGISTRY_CONSUL_ADDR
+          value: registry:8500
+        - name: FABIO_REGISTRY_CONSUL_REGISTER_NAME
+          value: gateway
+        image: "fabiolb/fabio:1.5.8-go1.10"
+        name: gateway
+        ports:
+        - containerPort: 9998
+          protocol: TCP
+        - containerPort: 9999
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 150m
+            memory: 150m
+          limits:
+            cpu: 200m
+            memory: 128Mi
+      nodeSelector:
+        runtime: log
+---
+# Source: reportportal/templates/gateway-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  ports:
+  - name: "9998"
+    port: 9998
+    protocol: TCP
+    targetPort: 9998
+  - name: "9999"
+    port: 80
+    protocol: TCP
+    targetPort: 9999
+  selector:
+    component: reportportal-gateway
+  type: ClusterIP
+---
+# Source: reportportal/templates/gateway-ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: reportportal-gateway-ingress
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+  annotations:
+    kubernetes.io/ingress.class: "nginx-dev"
+spec:
+  rules:
+  - host: reportportal.in.in.alutech24.com
+    http:
+      paths:
+      - backend:
+          serviceName: gateway
+          servicePort: 80

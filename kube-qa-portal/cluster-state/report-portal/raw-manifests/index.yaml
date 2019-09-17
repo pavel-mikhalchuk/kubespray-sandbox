@@ -1,0 +1,58 @@
+# Source: reportportal/templates/index-statefulset.yaml
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: index
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: reportportal-index
+  serviceName: index-0
+  template:
+    metadata:
+      labels:
+        component: reportportal-index
+    spec:
+      containers:
+      - env:
+        - name: RP_PROXY_CONSUL
+          value: "true"
+        - name: RP_SERVER_PORT
+          value: "8090"
+        image: "reportportal/service-index:4.0.0"
+        name: index
+        ports:
+        - containerPort: 8090
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 150m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+      nodeSelector:
+        runtime: log
+---
+# Source: reportportal/templates/index-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: index-0
+  namespace: autotest
+  labels:     
+    app: "cautious-bison"
+spec:
+  ports:
+  - name: headless
+    port: 8090
+    protocol: TCP
+    targetPort: 8090
+  selector:
+    component: reportportal-index
+  type: ClusterIP
+---
