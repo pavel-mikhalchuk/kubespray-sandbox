@@ -67,8 +67,6 @@ metadata:
   name: reportportal-gateway-ingress
   labels:     
     app: "cautious-bison"
-  annotations:
-    kubernetes.io/ingress.class: "nginx-dev"
 spec:
   rules:
   - host: reportportal.qa.in.alutech24.com
