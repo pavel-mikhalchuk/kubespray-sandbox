@@ -3,7 +3,6 @@ apiVersion: apps/v1beta2
 kind: StatefulSet
 metadata:
   name: api
-  namespace: scramble
   labels:     
     app: "cautious-bison"
 spec:
