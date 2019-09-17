@@ -3,7 +3,6 @@ apiVersion: apps/v1beta2
 kind: StatefulSet
 metadata:
   name: index
-  namespace: autotest
   labels:     
     app: "cautious-bison"
 spec:
@@ -43,7 +42,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: index-0
-  namespace: autotest
   labels:     
     app: "cautious-bison"
 spec:

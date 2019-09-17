@@ -3,7 +3,6 @@ apiVersion: apps/v1beta2
 kind: StatefulSet
 metadata:
   name: gateway
-  namespace: autotest
   labels:     
     app: "cautious-bison"
 spec:
@@ -47,7 +46,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gateway
-  namespace: autotest
   labels:     
     app: "cautious-bison"
 spec:
@@ -69,7 +67,6 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: reportportal-gateway-ingress
-  namespace: autotest
   labels:     
     app: "cautious-bison"
   annotations:
