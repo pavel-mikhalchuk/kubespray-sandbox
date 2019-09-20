@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    repoURL: https://github.com/pavel-mikhalchuk/kubespray-sandbox
+    repoURL: http://bb.alutech-mc.com:8080/scm/as/infra.git
     targetRevision: HEAD
     path: kube-dev/cluster-state/jenkins/raw-manifests
     directory: 
